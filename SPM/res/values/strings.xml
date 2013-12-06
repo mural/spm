@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="appName">SPM</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+	<string name="yes">Si</string>
+	<string name="no">No</string>
+	<string name="loading">Cargando...</string>
+	<string name="confirmExit">Si salis de esta pantalla, se van a perder los cambios sin guardar. </string>
+	<string name="areYouSure">Esta seguro ?</string>
+	<string name="logout">Log Out</string>
+	<string name="delete">Borrar</string>
+	<string name="priceDate">Vigencia precios: %1$s</string>
+
+	<!-- Confirm Update Dialog -->
+	<string name="update">Actualizar</string>
+	<string name="notUpdate">No</string>
+	<string name="confirmUpdateTitle">Confirmar actualizacion</string>
+	<string name="confirmUpdateMsg">Seguro que desea actualizar ? Los pedidos no sincronizados usaran los nuevos precios !
+	</string>
+
+	<!-- Confirm Exit Dialog -->
+	<string name="exit">Salir</string>
+	<string name="notExit">Quedarse</string>
+	<string name="confirmExitTitle">Confirmar salir</string>
+	<string name="confirmExitMsg">Seguro que desea salir ? Puede usar el boton HOME para minimizar la aplicacion si prefiere.
+	</string>
+	
+	<!-- Clients Choose Action Dialog -->
+	<string name="orders">Pedidos</string>
+	<string name="visits">Notas</string>
+	<string name="chooseAction">Seleccionar Accion</string>
+	<string name="chooseActionText">Seleccione la accion que desee</string>
+	
+	<!-- Visit other topic not filled -->
+    <string name="fillTopicTitle">Tema faltante</string>
+    <string name="fillTopicMessage">Debe completar el tema con una descripcion.</string>
+
+	<!-- Order Detail Activity -->
+	<string name="menuSave">Guardar</string>
+
+	<!-- Orders Activity -->
+	<string name="newOrder">Nuevo</string>
+
+	<!-- Detail Order Activity -->
+	<string name="dtoClient">Dto. Cliente: %1$s %%</string>
+
+	<!-- Products Activity -->
+	<string name="productsTitle">Productos - Dto. %1$s %%</string>
+
+	<!-- Errors -->
+	<string name="internalError">Error interno. Trate de nuevo</string>
+	<string name="serverError">Ocurrio un error con el servidor, reintente</string>
+	<string name="connectionError">Error de conexion. Intente nuevamente</string>
+	<string name="facebookError">There is a problem connecting to Facebook. Please try again.</string>
+	<string name="userNotFoundError">Usuario o telefono incorrecto.</string>
+	<string name="db4oError">Error con la base de datos</string>
+	<string name="syncDateError">Debe actualizar las datos antes de sincronizar.</string>
+	<string name="updateDataDateError">Los datos ya estan actualizados.</string>
+	<string name="notSelectedItemError">Debe seleccionar un item.</string>
+
+	<!-- Picture Menu Activity -->
+	<string name="takePhoto">Take Photo</string>
+	<string name="chooseFromLibrary">Choose from Library</string>
+
+	<!-- External Apps -->
+	<string name="barcodeScanner">Barcode Scanner</string>
+	<string name="voiceSearch">Voice Search</string>
+
+	<!-- Market Utils -->
+	<string name="updateAppTitle">%1$s outdated</string>
+	<string name="updateAppMessage">You have been signed out of %1$s because you
+		are using an outdated version. Please update the
+		application and try
+		again.</string>
+	<string name="installAppTitle">Install %1$s?</string>
+	<string name="installAppMessage">This application requires %1$s. Would you like to install it?</string>
+
+	<!-- ExceptionReportActivity -->
+	<string name="exceptionReportDialogTitle">%1$s se colgo</string>
+	<string name="exceptionReportDialogText">%1$s se colgo por un error inesperado.
+		Ayude a arreglar el error mandando un reporte</string>
+	<string name="exceptionReportNotificationTitle">%1$s se colgo</string>
+	<string name="exceptionReportNotificationText">Click para ayudar a resolver el problema</string>
+
+	<!-- Settings Activity -->
+	<string name="settings">Settings</string>
+	<string name="pushNotificationsTitle">Push Notifications</string>
+	<string name="pushNotificationsDescription">Enable/disable push notifications</string>
+
+	<!-- DEV Settings Activity -->
+	<string name="serverMockTitle">Server Mocks</string>
+	<string name="serverMockTitleDescription">Enable/disable server mocks</string>
+
+	<!-- Share Activity -->
+	<string name="facebook">Facebook</string>
+
+</resources>

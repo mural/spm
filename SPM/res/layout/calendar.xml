@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="match_parent" android:gravity="center"
+		android:layout_marginTop="10dp" android:layout_marginBottom="10dp">
+		<ImageView android:id="@+id/previous" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:src="@drawable/prev_green_arrow"
+			android:textColor="@android:color/black" android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp" />
+		<Button android:id="@+id/up" android:gravity="center"
+			android:layout_width="match_parent" android:layout_height="wrap_content"
+			android:layout_weight="1" android:textStyle="bold" />
+
+		<ImageView android:id="@+id/next" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:src="@drawable/next_green_arrow"
+			android:textColor="@android:color/black" android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/events" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:orientation="vertical"
+		android:visibility="gone">
+		<TextView android:layout_height="wrap_content" android:layout_width="match_parent" />
+	</LinearLayout>
+
+	<!-- Days View -->
+	<TableLayout android:id="@+id/days" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:stretchColumns="*">
+		<TableRow>
+			<TextView style="@style/DayWeek" />
+			<TextView style="@style/DayWeek" />
+			<TextView style="@style/DayWeek" />
+			<TextView style="@style/DayWeek" />
+			<TextView style="@style/DayWeek" />
+			<TextView style="@style/DayWeek" />
+			<TextView style="@style/DayWeek" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+			<TextView style="@style/Day" />
+		</TableRow>
+	</TableLayout>
+
+	<!-- Months View -->
+	<TableLayout android:id="@+id/months" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:stretchColumns="*"
+		android:visibility="gone">
+		<TableRow>
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+			<TextView style="@style/Month" />
+		</TableRow>
+	</TableLayout>
+
+	<!-- Years View -->
+	<TableLayout android:id="@+id/years" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:stretchColumns="*"
+		android:visibility="gone">
+		<TableRow>
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+		</TableRow>
+		<TableRow>
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+			<TextView style="@style/Year" />
+		</TableRow>
+	</TableLayout>
+</LinearLayout>

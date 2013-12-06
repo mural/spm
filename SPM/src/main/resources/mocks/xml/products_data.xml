@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products type="array">
+  <product>
+  	<id>9998</id>
+    <name>PRODUCTO COPADO</name>
+    <price>177.7</price>
+  </product>
+  <product>
+  	<id>8888</id>
+    <name>LE BEST PRODUCT</name>
+    <price>177</price>
+  </product>
+  <product>
+  	<id>7777</id>
+    <name>PRODUCTAZO</name>
+    <price>354</price>
+  </product>
+</products>

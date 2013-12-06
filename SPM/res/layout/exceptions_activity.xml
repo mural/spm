@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent" android:layout_gravity="center_horizontal"
+	android:gravity="center_horizontal" android:layout_margin="10dp">
+
+	<Button android:id="@+id/businessUIThread" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:text="Bussiness Exception (UI Thread)" />
+
+	<Button android:id="@+id/businessNewThread"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:text="Bussiness Exception (New Thread)" />
+
+	<Button android:id="@+id/applicationUIThread"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:text="Application Exception (UI Thread)" />
+
+	<Button android:id="@+id/applicationNewThread"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:text="Application Exception (New Thread)" />
+
+	<Button android:id="@+id/unexpectedUIThread"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:text="Unexpected Exception (UI Thread)" />
+
+	<Button android:id="@+id/unexpectedNewThread"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:text="Unexpected Exception (New Thread)" />
+
+	<Button android:id="@+id/otherUIThread" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:text="Others Exceptions (UI Thread)" />
+
+	<Button android:id="@+id/otherNewThread" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:text="Others Exceptions (New Thread)" />
+
+</LinearLayout>

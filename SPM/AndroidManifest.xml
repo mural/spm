@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.spm"
+    android:versionCode="2000206"
+    android:versionName="2.6" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <compatible-screens>
+
+        <!-- small size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="small" />
+
+        <!-- Only hdpi and xhdpi for normal size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="normal" />
+
+        <!-- all large size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="large" />
+
+        <!-- all xlarge size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="xlarge" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="xlarge" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="xlarge" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="xlarge" />
+
+        <!-- Special case for Nexus 7 -->
+        <screen
+            android:screenDensity="213"
+            android:screenSize="large" />
+    </compatible-screens>
+
+    <application
+        android:name=".android.SPMApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/appName"
+        android:theme="@style/MyThemeWihoutTitle" >
+        <activity android:name=".android.activity.SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".android.activity.LoginActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".android.activity.DashBoardActivity"
+            android:label="@string/appName" />
+        <activity android:name=".android.activity.ClientsActivity" />
+        <activity android:name=".android.activity.OrdersActivity" />
+        <activity android:name=".android.activity.DetailOrderActivity" />
+        <activity android:name=".android.activity.VisitsActivity" />
+        <activity android:name=".android.activity.DetailVisitActivity" />
+        <activity android:name=".android.activity.LinesActivity" />
+        <activity android:name=".android.activity.ProductsActivity" />
+        <activity android:name=".android.activity.SyncActivity" />
+        <activity android:name=".android.activity.MyMapActivity" />
+        <activity android:name=".android.activity.settings.DevSettingsActivity" />
+        <activity android:name=".android.activity.settings.SettingsActivity" />
+        <activity
+            android:name=".android.exception.ExceptionReportActivity"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+
+        <service android:name=".android.activity.MyLocationService" />
+        <service android:name=".android.exception.ExceptionReportService" />
+
+        <!-- Cloud to Device Configuration -->
+        <!-- <service android:name=".android.c2dm.C2DMService" /> -->
+        <!-- <receiver android:name=".android.c2dm.C2DMBroadcastReceiver" -->
+        <!-- android:permission="com.google.android.c2dm.permission.SEND"> -->
+        <!-- Receive actual messages -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.android.c2dm.intent.RECEIVE" /> -->
+        <!-- <category android:name="com.spm" /> -->
+        <!-- </intent-filter> -->
+        <!-- Receive registration ids -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.android.c2dm.intent.REGISTRATION" /> -->
+        <!-- <category android:name="com.spm" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+
+
+        <uses-library android:name="com.google.android.maps" />
+
+    </application>
+
+    <!-- Cloud to Device Messaging permissions -->
+    <!-- <permission android:name="com.spm.permission.C2D_MESSAGE" android:protectionLevel="signature" /> -->
+    <!-- <uses-permission android:name="com.spm.permission.C2D_MESSAGE" /> -->
+    <!-- <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /> -->
+    <!-- <uses-permission android:name="android.permission.WAKE_LOCK" /> -->
+    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
+
+</manifest>

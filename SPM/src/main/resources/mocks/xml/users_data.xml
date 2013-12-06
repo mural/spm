@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users type="array">
+  <user>
+    <id>12</id>
+    <name>UN USUARIO</name>
+  </user>
+  <user>
+  	<id>16</id>
+    <name>MIGUEL ANGEL</name>
+  </user>
+  <user>
+    <id>2</id>
+    <name>TEST</name>
+  </user>
+</users>

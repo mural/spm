@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res/com.spm"
+	android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:weightSum="1" android:gravity="center_horizontal">
+
+	<com.spm.android.common.view.ActionBar android:id="@+id/actionBar"
+		android:layout_width="match_parent" android:layout_height="wrap_content" app:title="LOGIN" />
+
+	<TextView android:text="Usuario" android:id="@+id/userText" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:paddingTop="15dp" />
+	<EditText android:id="@+id/username" android:layout_height="wrap_content" android:singleLine="true"
+		android:layout_width="300dp" android:nextFocusDown="@+id/loginButton">
+		<requestFocus></requestFocus>
+	</EditText>
+
+	<!-- <TextView android:id="@+id/passwordText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingTop="15dp" 
+		android:textColor="@android:color/white" android:text="Contraseña"></TextView> <EditText android:id="@+id/password" android:layout_height="wrap_content" 
+		android:inputType="textPassword" android:layout_width="302dp"></EditText> -->
+
+	<RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:layout_marginTop="20dp" android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp">
+		<Button android:layout_width="wrap_content" android:id="@+id/loginButton" android:text="Aceptar"
+			android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"></Button>
+		<Button android:layout_width="wrap_content" android:id="@+id/update" android:text="Actualizar usuarios"
+			android:layout_height="wrap_content" android:layout_alignParentRight="true"></Button>
+		<ImageView android:src="@drawable/logo" android:layout_height="wrap_content" android:id="@+id/imageView1"
+			android:layout_width="wrap_content" android:layout_centerVertical="true" android:layout_centerHorizontal="true"></ImageView>
+		<TextView android:id="@+id/version" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:text="v2.0"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	</RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/row" >
+
+    <TextView
+        android:id="@+id/productName"
+        style="@style/rowContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/minus"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="Product Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/minus"
+        style="@style/rowContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/quantity"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="-"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/quantity"
+        style="@style/rowContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/plus"
+        android:padding="1dp"
+        android:singleLine="true"
+        android:text="0"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/plus"
+        style="@style/rowContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/productPrice"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="+"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/productPrice"
+        style="@style/rowContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/check"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="$ 0.00"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:padding="5dp" />
+
+</RelativeLayout>

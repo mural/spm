@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clients type="array">
+  <client>
+  	<id>554433</id>
+    <name>GRAND CLIENT</name>
+    <discount>20</discount>
+    <discount2>10</discount2>
+    <user_id>2</user_id>
+  </client>
+    <client>
+  	<id>887766</id>
+    <name>UN CLIENTE</name>
+    <discount>20</discount>
+    <discount2>10.5</discount2>
+    <user_id>2</user_id>
+  </client>
+</clients>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<cloudbees-web-app xmlns="http://www.cloudbees.com/xml/webapp/1">
+  <!-- Application ID (formatted CB_ACCOUNT/APPNAME) -->
+  <appid>spm000/spm</appid>
+
+  <!-- Extra context parameters -->
+
+
+  <!-- DataSources (use names referenced via <resource-ref> in WEB-INF/web.xml) -->
+
+</cloudbees-web-app>

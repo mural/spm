@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+	android:layout_height="wrap_content" android:background="@drawable/row">
+
+	<TextView android:id="@+id/orderName" android:layout_width="match_parent" android:layout_height="wrap_content"
+	android:text="Order Name" android:textStyle="bold" android:textSize="14sp" android:singleLine="true" android:ellipsize="end"
+	android:padding="5dp" style="@style/rowContent" android:layout_toLeftOf="@+id/orderDate" />
+
+	<TextView android:id="@+id/orderDate" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="01/01/2000" android:textStyle="bold" android:textSize="14sp" android:singleLine="true"
+		android:ellipsize="end" android:padding="5dp" style="@style/rowContent" android:layout_toLeftOf="@+id/arrow" />
+
+	<ImageView android:id="@+id/arrow" style="@style/rowArrow" />
+
+</RelativeLayout>

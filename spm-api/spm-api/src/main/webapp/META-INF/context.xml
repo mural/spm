@@ -1,0 +1,17 @@
+<Context reloadable="true">
+    <Environment name="app/homePath" value="com.spm.server" type="java.lang.String" override="false" />
+	<Environment name="db/user" value="moeo" type="java.lang.String" override="false" />
+    <Environment name="db/password" value="moeo" type="java.lang.String" override="false" />
+    <Environment name="jdbc/url" value="jdbc:mysql://localhost/moeo" type="java.lang.String" override="false" />
+    <Environment name="mail/host" value="smtp.teracode.com" type="java.lang.String" override="false" />
+    <Environment name="mail/username" value="sendersmtp@teracode.com" type="java.lang.String" override="false" />
+    <Environment name="mail/password" value="t3r4c0d3" type="java.lang.String" override="false" />
+    <Environment name="mail/from" value="YOUR EMAIL" type="java.lang.String" override="false" />
+    <Environment name="mail/to" value="YOUR EMAIL" type="java.lang.String" override="false" />
+    <Environment name="mail/smtp/auth" value="false" type="java.lang.String" override="false" />
+    
+    <Manager className='org.apache.catalina.session.PersistentManager'
+                saveOnRestart='true'>
+   		<Store className='org.apache.catalina.session.FileStore'/>
+   	</Manager>
+</Context>

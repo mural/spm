@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="list" parent="android:Widget.ListView">
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:divider">@android:color/black</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    
+    <style name="grid">
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+    </style>
+    
+	<style name="CustomDialog">
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+		<item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+		<item name="android:background">@android:color/transparent</item>
+	</style>
+
+	<style name="SmallBlackProgressIndicator" parent="@android:style/Widget.ProgressBar.Inverse">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:indeterminate">true</item>
+		<item name="android:background">@android:color/transparent</item>
+	</style>
+
+	<style name="LargeWhiteProgressIndicator" parent="@android:style/Widget.ProgressBar.Large">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">7dp</item>
+		<item name="android:layout_marginRight">7dp</item>
+		<item name="android:layout_marginTop">7dp</item>
+		<item name="android:layout_marginBottom">7dp</item>
+		<item name="android:indeterminate">true</item>
+		<item name="android:background">@android:color/transparent</item>
+	</style>
+
+	<style name="borderBlack1dp">
+		<item name="android:background">@drawable/border</item>
+		<item name="android:padding">1dp</item>
+	</style>
+
+	<!-- Calendar View -->
+	<style name="DayWeek" parent="@android:style/TextAppearance">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:padding">6sp</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textColor">#000000</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+	<style name="Day" parent="@android:style/TextAppearance">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:padding">6sp</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textColor">#000000</item>
+	</style>
+	<style name="Month" parent="@android:style/TextAppearance">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:padding">10sp</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textColor">#000000</item>
+	</style>
+	<style name="Year" parent="@android:style/TextAppearance">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:padding">10sp</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textColor">#000000</item>
+	</style>
+	
+	<!-- Facebook -->
+	<style name="fbProgressDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+  		<item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="defaultItemTextAppearance">
+		<item name="android:textColor">@android:color/black</item>
+	</style>
+
+</resources>

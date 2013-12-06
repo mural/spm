@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res/com.spm"
+	android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
+	android:background="@color/lightWhite">
+
+	<com.spm.android.common.view.ActionBar android:id="@+id/actionBar"
+		android:layout_width="match_parent" android:layout_height="wrap_content" app:title="Sincronizar" />
+
+	<ListView style="@style/list" android:id="@+id/android:list" android:layout_margin="10dp"
+		android:layout_weight="99" />
+
+	<TextView android:id="@id/android:empty" android:text="No hay pedidos" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" style="@style/noResultsText" />
+
+
+	<TextView android:id="@+id/syncPriceDate" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="@string/priceDate" android:textStyle="bold" android:textSize="14sp" android:singleLine="true"
+		android:ellipsize="end" style="@style/rowThinContent" android:layout_gravity="right" android:textColor="@android:color/black"
+		android:layout_weight="1" />
+
+</LinearLayout>

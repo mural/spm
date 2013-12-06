@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>src/main/webapp</rootDir>
+    <exportSource>true</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>true</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation>C:\Users\agus\projects\spm-api\spm-api\spm-api.war</warLocation>
+    <extraInfo>%0D%0A%09++%0D%0A++++%3CEnvironment+name%3D%22app%2FhomePath%22+value%3D%22YOUR+APP+HOME+PATH+HERE%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A%09%3CEnvironment+name%3D%22db%2Fuser%22+value%3D%22moeo%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22db%2Fpassword%22+value%3D%22moeo%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22jdbc%2Furl%22+value%3D%22jdbc%3Amysql%3A%2F%2Flocalhost%2Fmoeo%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22mail%2Fhost%22+value%3D%22smtp.teracode.com%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22mail%2Fusername%22+value%3D%22sendersmtp%40teracode.com%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22mail%2Fpassword%22+value%3D%22t3r4c0d3%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22mail%2Ffrom%22+value%3D%22YOUR+EMAIL%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22mail%2Fto%22+value%3D%22YOUR+EMAIL%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%3CEnvironment+name%3D%22mail%2Fsmtp%2Fauth%22+value%3D%22false%22+type%3D%22java.lang.String%22+override%3D%22false%22+%2F%3E%0D%0A++++%0D%0A++++%3CManager+className%3D%27org.apache.catalina.session.PersistentManager%27%0D%0A++++++++++++++++saveOnRestart%3D%27true%27%3E%0D%0A+++%09%09%3CStore+className%3D%27org.apache.catalina.session.FileStore%27%2F%3E%0D%0A+++%09%3C%2FManager%3E%0D%0A%0D%0A++++</extraInfo>
+    <webPath>/spm-api</webPath>
+    <webClassPathEntries>
+        <webClassPathEntry>/api/target/classes</webClassPathEntry>
+    </webClassPathEntries>
+</tomcatProjectProperties>

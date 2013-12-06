@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res/com.spm"
+	android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+
+	<com.spm.android.common.view.ActionBar android:id="@+id/actionBar"
+		android:layout_width="match_parent" android:layout_height="wrap_content" app:title="Detalle de pedido" />
+
+	<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_margin="2dp" android:layout_gravity="center_vertical|center_horizontal" android:gravity="center_vertical|center_horizontal">
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nro. Pedido: "
+			android:textStyle="bold" android:textSize="14sp" android:singleLine="true" android:ellipsize="end" style="@style/rowThinContent"
+			android:layout_gravity="center_horizontal" />
+		<TextView android:id="@+id/orderNum" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="10196810003" android:textStyle="bold" android:textSize="14sp" android:singleLine="true"
+			android:ellipsize="end" style="@style/rowThinContent" android:layout_gravity="center_horizontal"
+			android:layout_marginLeft="-5dp" />
+		<TextView android:id="@+id/dto" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Dto. Cliente: 0%" android:textStyle="bold" android:textSize="14sp" android:singleLine="true"
+			style="@style/rowThinContent" android:layout_gravity="center_horizontal" android:layout_marginLeft="5dp" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_margin="2dp" android:background="@color/lightWhite">
+		<TextView android:id="@+id/product" android:layout_height="wrap_content" android:text="Producto"
+			android:textStyle="bold" android:textSize="14sp" android:singleLine="true" android:ellipsize="end" style="@style/rowThinContent"
+			android:textColor="@android:color/black" android:layout_weight="1" />
+		<TextView android:id="@+id/quantity" android:layout_height="wrap_content" android:text="Cant."
+			android:textStyle="bold" android:textSize="14sp" android:singleLine="true" android:ellipsize="end" style="@style/rowThinContent"
+			android:textColor="@android:color/black" android:width="60dp" />
+		<TextView android:id="@+id/discount" android:layout_height="wrap_content" android:text="Desc."
+			android:textStyle="bold" android:textSize="14sp" android:singleLine="true" android:ellipsize="end" style="@style/rowThinContent"
+			android:textColor="@android:color/black" android:width="60dp" />
+		<TextView android:id="@+id/price" android:text="Precio" android:textStyle="bold" android:textSize="14sp"
+			android:singleLine="true" android:ellipsize="end" style="@style/rowThinContent" android:textColor="@android:color/black"
+			android:width="60dp" />
+	</LinearLayout>
+
+	<ListView android:id="@+id/android:list" style="@style/list" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:layout_margin="2dp" android:background="@color/lightWhite"
+		android:layout_weight="99" />
+
+	<TextView android:id="@id/android:empty" android:text="No hay productos" android:layout_width="wrap_content"
+		android:layout_height="match_parent" style="@style/noResultsText" android:layout_margin="5dp" android:layout_weight="99" />
+
+	<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+		<Spinner android:id="@+id/estado" android:layout_width="wrap_content" android:layout_height="40dp" />
+
+		<TextView android:id="@+id/subTotal" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Subtotal: $0" android:textStyle="bold" android:textSize="14sp" android:singleLine="true"
+			android:ellipsize="end" style="@style/rowThinContent" android:gravity="right" android:layout_weight="1" />
+	</LinearLayout>
+
+	<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+		<Spinner android:id="@+id/tipo" android:layout_width="wrap_content" android:layout_height="40dp" />
+
+		<TextView android:id="@+id/total" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Total: $0" android:textStyle="bold" android:textSize="14sp" android:singleLine="true"
+			android:ellipsize="end" style="@style/rowThinContent" android:gravity="right" android:layout_weight="1" />
+	</LinearLayout>
+</LinearLayout>
