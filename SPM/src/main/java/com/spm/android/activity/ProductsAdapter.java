@@ -8,6 +8,7 @@ import java.util.Set;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -113,10 +114,26 @@ public class ProductsAdapter extends
 						.toString());
 				if (quantity.intValue() > 0) {
 					quantity--;
+					product.setQuantity(quantity);
 					holder.quantity.setText(quantity.toString());
 				}
 			}
 		});
+
+		holder.minus.setOnLongClickListener(new OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				Integer quantity = Integer.valueOf(holder.quantity.getText()
+						.toString());
+				if (quantity.intValue() > 0) {
+					quantity--;
+					product.setQuantity(quantity);
+					holder.quantity.setText(quantity.toString());
+				}
+				return false;
+			}
+		}); // TODO: no sirve asi, usr como stackovwerflor
 
 		holder.plus.setOnClickListener(new OnClickListener() {
 
@@ -125,6 +142,7 @@ public class ProductsAdapter extends
 				Integer quantity = Integer.valueOf(holder.quantity.getText()
 						.toString());
 				quantity++;
+				product.setQuantity(quantity);
 				holder.quantity.setText(quantity.toString());
 			}
 		});
