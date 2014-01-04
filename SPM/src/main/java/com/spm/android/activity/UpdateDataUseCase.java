@@ -2,9 +2,11 @@ package com.spm.android.activity;
 
 import java.util.Date;
 import java.util.List;
+
 import com.google.inject.Inject;
 import com.spm.android.common.AndroidApplication;
 import com.spm.common.domain.Application;
+import com.spm.common.exception.CommonErrorCode;
 import com.spm.common.usecase.DefaultAbstractUseCase;
 import com.spm.domain.Client;
 import com.spm.domain.Product;
@@ -20,20 +22,21 @@ import com.spm.service.APIService;
  * @author Agustin Sgarlata
  */
 public class UpdateDataUseCase extends DefaultAbstractUseCase {
-	
+
 	ProductRepository productRepository;
 	ClientRepository clientRepository;
 	UserRepository userRepository;
-	
+
 	@Inject
-	public UpdateDataUseCase(APIService apiService, ProductRepository productRepository,
+	public UpdateDataUseCase(APIService apiService,
+			ProductRepository productRepository,
 			ClientRepository clientRepository, UserRepository userRepository) {
 		super(apiService);
 		this.productRepository = productRepository;
 		this.clientRepository = clientRepository;
 		this.userRepository = userRepository;
 	}
-	
+
 	/**
 	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
 	 */
@@ -41,18 +44,23 @@ public class UpdateDataUseCase extends DefaultAbstractUseCase {
 	protected void doExecute() {
 		User user = AndroidApplication.get().getUser();
 		Date dateOfPriceList = getApiService().getPriceListDate();
-		// if ((user.getUpdateDate() != null) && (dateOfPriceList.compareTo(user.getUpdateDate()) <= 0)) {
-		// throw CommonErrorCode.UPDATE_DATA_DATE_ERROR.newLocalBusinessException();
-		// }
-		
-		List<Client> clients = getApiService().getClients(Application.APPLICATION_PROVIDER.get().getUser());
+		if ((user.getUpdateDate() == null)
+				|| (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
+			throw CommonErrorCode.UPDATE_DATA_DATE_ERROR
+					.newLocalBusinessException();
+		}
+
+		List<Client> clients = getApiService().getClients(
+				Application.APPLICATION_PROVIDER.get().getUser());
 		clientRepository.addAll(clients);
-		
+
 		List<Product> products = getApiService().getProducts();
 		productRepository.addAll(products);
-		
-		user.setUpdateDate(dateOfPriceList); // Can be changed to priceListDate, and use updateDate for other purpose
+
+		user.setUpdateDate(dateOfPriceList); // Can be changed to priceListDate,
+												// and use updateDate for other
+												// purpose
 		userRepository.add(user);
 	}
-	
+
 }

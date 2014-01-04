@@ -79,20 +79,22 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 			onFinishUseCase();
 		}
 
-		actionBar.addImageViewAction(R.drawable.add, new OnClickListener() {
+		actionBar.addImageViewAction(R.drawable.ic_check,
+				new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				List<Product> products = Lists.newArrayList();
-				products.addAll(productsUseCase.getSelectedItems());
+					@Override
+					public void onClick(View v) {
+						List<Product> products = Lists.newArrayList();
+						products.addAll(productsUseCase.getSelectedItems());
 
-				Intent intent = new Intent();
-				intent.putExtra(PRODUCT, (Serializable) products); // agregar la
-																	// cantidad
-				setResult(RESULT_OK, intent);
-				finish();
-			}
-		});
+						Intent intent = new Intent();
+						intent.putExtra(PRODUCT, (Serializable) products); // agregar
+																			// la
+																			// cantidad
+						setResult(RESULT_OK, intent);
+						finish();
+					}
+				});
 	}
 
 	/**

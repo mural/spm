@@ -58,7 +58,7 @@
         style="@style/rowContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/check"
+        android:layout_alignParentRight="true"
         android:padding="5dp"
         android:singleLine="true"
         android:text="$ 0.00"
@@ -72,6 +72,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
         android:layout_marginTop="15dp"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:visibility="gone" />
 
 </RelativeLayout>

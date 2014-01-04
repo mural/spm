@@ -231,18 +231,32 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 		});
 
 		if (canEdit()) {
-			actionBar.addImageViewAction(R.drawable.add, new OnClickListener() {
+			actionBar.addImageViewAction(R.drawable.ic_add_prod,
+					new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					Bundle bundle = new Bundle();
-					bundle.putDouble(ProductsActivity.DTO, discount);
-					bundle.putSerializable(ProductsActivity.CLIENT, client);
-					ActivityLauncher.launchActivity(ProductsActivity.class,
-							bundle, ProductsActivity.REQUEST_CODE);
-				}
-			});
+						@Override
+						public void onClick(View v) {
+							Bundle bundle = new Bundle();
+							bundle.putDouble(ProductsActivity.DTO, discount);
+							bundle.putSerializable(ProductsActivity.CLIENT,
+									client);
+							ActivityLauncher.launchActivity(
+									ProductsActivity.class, bundle,
+									ProductsActivity.REQUEST_CODE);
+						}
+					});
 		}
+
+		actionBar.addImageViewAction(R.drawable.ic_sync_bl,
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Bundle bundle = new Bundle();
+						ActivityLauncher.launchActivity(SyncActivity.class,
+								bundle);
+					}
+				});
 
 		registerForContextMenu(getListView());
 	}

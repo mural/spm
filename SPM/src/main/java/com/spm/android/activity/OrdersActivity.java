@@ -51,26 +51,31 @@ public class OrdersActivity extends AbstractListActivity<Order> {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.orders_activity);
 
-		actionBar.addImageViewAction(R.drawable.add, new OnClickListener() {
+		actionBar.setTitle(client.getFirstName());
 
-			@Override
-			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				bundle.putSerializable(OrdersActivity.CLIENT,
-						ordersUseCase.getClient());
-				ActivityLauncher.launchActivity(DetailOrderActivity.class,
-						bundle);
-			}
-		});
+		actionBar.addImageViewAction(R.drawable.ic_add_order,
+				new OnClickListener() {
 
-		actionBar.addImageViewAction(R.drawable.ic_sync, new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Bundle bundle = new Bundle();
+						bundle.putSerializable(OrdersActivity.CLIENT,
+								ordersUseCase.getClient());
+						ActivityLauncher.launchActivity(
+								DetailOrderActivity.class, bundle);
+					}
+				});
 
-			@Override
-			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				ActivityLauncher.launchActivity(SyncActivity.class, bundle);
-			}
-		});
+		actionBar.addImageViewAction(R.drawable.ic_sync_bl,
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Bundle bundle = new Bundle();
+						ActivityLauncher.launchActivity(SyncActivity.class,
+								bundle);
+					}
+				});
 
 		registerForContextMenu(getListView());
 	}

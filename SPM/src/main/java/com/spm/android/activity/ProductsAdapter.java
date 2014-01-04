@@ -101,7 +101,7 @@ public class ProductsAdapter extends
 							onSelectionChanged();
 						}
 					});
-			holder.checked.setVisibility(View.VISIBLE);
+			// holder.checked.setVisibility(View.VISIBLE);
 		} else {
 			holder.checked.setVisibility(View.GONE);
 		}
@@ -116,6 +116,10 @@ public class ProductsAdapter extends
 					quantity--;
 					product.setQuantity(quantity);
 					holder.quantity.setText(quantity.toString());
+				}
+				if (quantity.intValue() == 0) {
+					holder.checked.setChecked(false);
+					selectedProducts.remove(product);
 				}
 			}
 		});
@@ -144,6 +148,11 @@ public class ProductsAdapter extends
 				quantity++;
 				product.setQuantity(quantity);
 				holder.quantity.setText(quantity.toString());
+
+				if (quantity.intValue() > 0) {
+					holder.checked.setChecked(true);
+					selectedProducts.add(product);
+				}
 			}
 		});
 	}

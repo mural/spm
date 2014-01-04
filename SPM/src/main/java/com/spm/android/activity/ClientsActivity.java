@@ -1,11 +1,13 @@
 package com.spm.android.activity;
 
+import roboguice.inject.InjectView;
 import android.os.Bundle;
 
 import com.spm.R;
 import com.spm.android.common.ActivityLauncher;
 import com.spm.android.common.AndroidApplication;
 import com.spm.android.common.activity.AbstractListActivity;
+import com.spm.android.common.view.ActionBar;
 import com.spm.common.domain.Application;
 import com.spm.domain.Client;
 import com.spm.domain.User;
@@ -19,6 +21,9 @@ public class ClientsActivity extends AbstractListActivity<Client> {
 	private ClientsUseCase categoriesUseCase;
 	private ClientsAdapter categoriesAdapter;
 
+	@InjectView(R.id.actionBar)
+	private ActionBar actionBar;
+
 	/**
 	 * @see com.splatt.android.common.activity.AbstractListActivity#onCreate(android.os.Bundle)
 	 */
@@ -26,6 +31,8 @@ public class ClientsActivity extends AbstractListActivity<Client> {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.clients_activity);
+
+		actionBar.setTitle("Clientes");
 
 		categoriesUseCase = (ClientsUseCase) getLastNonConfigurationInstance();
 		if (categoriesUseCase == null) {

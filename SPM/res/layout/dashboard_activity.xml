@@ -1,32 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout	xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res/com.spm"
-	android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.spm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-	<com.spm.android.common.view.ActionBar android:id="@+id/actionBar"
-		android:layout_width="match_parent" android:layout_height="wrap_content" app:title="DASHBOARD" />
+    <com.spm.android.common.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="DASHBOARD" />
 
-	<ScrollView  android:layout_width="match_parent" android:layout_height="match_parent" 
-	    android:layout_below="@+id/actionBar" android:layout_above="@+id/dashPriceList">
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-		android:orientation="vertical">
-		<TextView android:id="@+id/userName" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="Nombre de usuario"
-			android:textSize="22sp" android:layout_margin="8dp" android:layout_gravity="center_horizontal" />
-		<Button android:id="@+id/map" android:layout_width="match_parent" android:layout_height="wrap_content"
-			android:layout_margin="7dp" android:text="Mapa" android:textSize="42sp" android:visibility="gone" />
-		<Button android:id="@+id/sync" android:layout_width="match_parent" android:layout_height="wrap_content"
-			android:layout_margin="7dp"
-			android:text="Sincronizar" android:textSize="42sp" />
-		<Button android:id="@+id/clientes" android:layout_width="match_parent" android:layout_height="wrap_content"
-			 android:layout_margin="7dp" android:text="Visitas" android:textSize="42sp" />
-		<Button android:id="@+id/update" android:layout_width="match_parent" android:layout_height="wrap_content"
-			android:layout_margin="7dp" android:text="Actualizar" android:textSize="42sp" />
-	</LinearLayout>
-	</ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/dashPriceList"
+        android:layout_below="@+id/actionBar" >
 
-	<TextView android:id="@+id/dashPriceList" style="@style/rowThinContent" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
-		android:ellipsize="end" android:singleLine="true" android:text="@string/priceDate"
-		android:textColor="@android:color/white" android:textSize="14sp" android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:text="Nombre de usuario"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:text="Mapa"
+                android:textSize="42sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/sync"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:text="Sincronizar"
+                android:textSize="42sp" />
+
+            <Button
+                android:id="@+id/clientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:text="Visitas"
+                android:textSize="42sp" />
+
+            <Button
+                android:id="@+id/update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:text="Actualizar"
+                android:textSize="42sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/dashPriceList"
+        style="@style/rowThinContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/priceDate"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
