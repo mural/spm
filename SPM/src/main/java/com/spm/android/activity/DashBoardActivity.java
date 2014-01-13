@@ -198,7 +198,7 @@ public class DashBoardActivity extends AbstractActivity {
 				.checkValidDate()) {
 			user.setUpdateDate(new Date());
 			Application.APPLICATION_PROVIDER.get().attach(user);
-			AndroidApplication.get().logout();
+			// AndroidApplication.get().logout(); //TODO waht ? ?¡
 		} else {
 			userName.setText(user.getFirstName());
 		}

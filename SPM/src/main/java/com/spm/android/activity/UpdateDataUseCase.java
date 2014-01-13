@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
-import com.spm.android.common.AndroidApplication;
 import com.spm.common.domain.Application;
 import com.spm.common.exception.CommonErrorCode;
 import com.spm.common.usecase.DefaultAbstractUseCase;
@@ -42,16 +41,15 @@ public class UpdateDataUseCase extends DefaultAbstractUseCase {
 	 */
 	@Override
 	protected void doExecute() {
-		User user = AndroidApplication.get().getUser();
+		User user = Application.APPLICATION_PROVIDER.get().getUser();
 		Date dateOfPriceList = getApiService().getPriceListDate();
-		if ((user.getUpdateDate() == null)
-				|| (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
+		if ((user != null) && (user.getUpdateDate() != null)
+				&& (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
 			throw CommonErrorCode.UPDATE_DATA_DATE_ERROR
 					.newLocalBusinessException();
 		}
 
-		List<Client> clients = getApiService().getClients(
-				Application.APPLICATION_PROVIDER.get().getUser());
+		List<Client> clients = getApiService().getClients(user);
 		clientRepository.addAll(clients);
 
 		List<Product> products = getApiService().getProducts();
