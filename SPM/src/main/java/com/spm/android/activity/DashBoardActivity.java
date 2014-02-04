@@ -5,6 +5,8 @@ import java.util.Date;
 import roboguice.inject.InjectView;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -54,6 +56,8 @@ public class DashBoardActivity extends AbstractActivity {
 	@InjectView(R.id.map)
 	private Button map;
 
+	boolean justCreated = true;
+
 	/**
 	 * @see com.spm.android.common.activity.AbstractActivity#onCreate(android.os.Bundle)
 	 */
@@ -90,8 +94,6 @@ public class DashBoardActivity extends AbstractActivity {
 		} else if (updateDataUseCase.isFinishFailed()) {
 			onFinishUseCase();
 		}
-
-		update.performClick();
 
 		userName.setOnClickListener(new OnClickListener() {
 
@@ -204,6 +206,29 @@ public class DashBoardActivity extends AbstractActivity {
 		}
 
 		updateDate();
+
+		if (justCreated) {
+			update.performClick(); // only first time...
+			justCreated = false;
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(Menu.NONE, R.drawable.ic_sync, Menu.NONE, R.string.resync)
+				.setIcon(R.drawable.ic_sync);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.drawable.ic_sync:
+			update.performClick();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 }

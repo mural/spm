@@ -11,6 +11,7 @@
 	<string name="logout">Log Out</string>
 	<string name="delete">Borrar</string>
 	<string name="priceDate">Vigencia precios: %1$s</string>
+	<string name="resync">Re-sincronizar</string>
 
 	<!-- Confirm Update Dialog -->
 	<string name="update">Actualizar</string>

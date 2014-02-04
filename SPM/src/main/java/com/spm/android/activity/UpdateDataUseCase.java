@@ -47,18 +47,21 @@ public class UpdateDataUseCase extends DefaultAbstractUseCase {
 				&& (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
 			throw CommonErrorCode.UPDATE_DATA_DATE_ERROR
 					.newLocalBusinessException();
+		} else if ((user != null) && (user.getUpdateDate() != null)
+				&& (dateOfPriceList.compareTo(user.getUpdateDate()) < 0)) {
+
+			List<Client> clients = getApiService().getClients(user);
+			clientRepository.addAll(clients);
+
+			List<Product> products = getApiService().getProducts();
+			productRepository.addAll(products);
+
+			user.setUpdateDate(dateOfPriceList);
+			// Can be changed to // priceListDate, // and use updateDate for
+			// other purpose
+			userRepository.add(user);
+
 		}
-
-		List<Client> clients = getApiService().getClients(user);
-		clientRepository.addAll(clients);
-
-		List<Product> products = getApiService().getProducts();
-		productRepository.addAll(products);
-
-		user.setUpdateDate(dateOfPriceList); // Can be changed to priceListDate,
-												// and use updateDate for other
-												// purpose
-		userRepository.add(user);
 	}
 
 }

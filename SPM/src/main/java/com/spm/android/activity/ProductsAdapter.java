@@ -87,6 +87,8 @@ public class ProductsAdapter extends
 			holder.checked.setOnCheckedChangeListener(null);
 			holder.checked.setChecked(selectedProducts.contains(product));
 
+			holder.quantity.setText(String.valueOf(product.getQuantity()));
+
 			holder.checked
 					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
