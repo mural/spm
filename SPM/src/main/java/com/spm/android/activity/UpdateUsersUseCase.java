@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.db4o.ext.DatabaseFileLockedException;
 import com.google.inject.Inject;
+import com.spm.android.common.utils.SharedPreferencesUtils;
 import com.spm.common.domain.Application;
 import com.spm.common.exception.CommonErrorCode;
 import com.spm.common.usecase.DefaultAbstractUseCase;
@@ -55,6 +56,10 @@ public class UpdateUsersUseCase extends DefaultAbstractUseCase {
 		try {
 			List<User> users = getApiService().getContacts();
 			userRepository.addAll(users);
+
+			// Guardo fecha ultima actualizacion
+			SharedPreferencesUtils.savePreference("updateUsers",
+					System.currentTimeMillis());
 
 			GregorianCalendar days = new GregorianCalendar();
 			days.setTime(new Date());

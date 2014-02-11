@@ -18,6 +18,18 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/productPrice"
+        style="@style/rowContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/minus"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="$ 0.00"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/minus"
         style="@style/rowContent"
         android:layout_width="wrap_content"
@@ -46,22 +58,10 @@
         style="@style/rowContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/productPrice"
+        android:layout_alignParentRight="true"
         android:padding="10dp"
         android:singleLine="true"
         android:text="+"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/productPrice"
-        style="@style/rowContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:padding="5dp"
-        android:singleLine="true"
-        android:text="$ 0.00"
         android:textSize="18sp"
         android:textStyle="bold" />
 
