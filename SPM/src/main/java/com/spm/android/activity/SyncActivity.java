@@ -3,6 +3,7 @@ package com.spm.android.activity;
 import java.util.List;
 
 import roboguice.inject.InjectView;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -246,5 +247,17 @@ public class SyncActivity extends AbstractListActivity<Work> {
 		protected ActivityIf getActivityIf() {
 			return SyncActivity.this;
 		}
+	}
+
+	/**
+	 * @see android.app.Activity#onBackPressed()
+	 */
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent intent = new Intent(this, AndroidApplication.get()
+				.getHomeActivityClass());
+		intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+		startActivity(intent);
 	}
 }

@@ -202,7 +202,7 @@ public class DashBoardActivity extends AbstractActivity {
 			Application.APPLICATION_PROVIDER.get().attach(user);
 			// AndroidApplication.get().logout(); //TODO waht ? ?¡
 		} else {
-			userName.setText(user.getFirstName());
+			userName.setText("Bienvenido: " + user.getFirstName());
 		}
 
 		updateDate();

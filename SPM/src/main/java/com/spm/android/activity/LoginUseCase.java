@@ -1,10 +1,6 @@
 package com.spm.android.activity;
 
-import android.content.Context;
-import android.telephony.TelephonyManager;
-
 import com.google.inject.Inject;
-import com.spm.android.common.AndroidApplication;
 import com.spm.common.domain.Application;
 import com.spm.common.exception.CommonErrorCode;
 import com.spm.common.usecase.DefaultAbstractUseCase;
@@ -42,9 +38,9 @@ public class LoginUseCase extends DefaultAbstractUseCase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		TelephonyManager tMgr = (TelephonyManager) AndroidApplication.get()
-				.getSystemService(Context.TELEPHONY_SERVICE);
-		String phoneNumber = tMgr.getLine1Number();
+		// TelephonyManager tMgr = (TelephonyManager) AndroidApplication.get()
+		// .getSystemService(Context.TELEPHONY_SERVICE);
+		// String phoneNumber = tMgr.getLine1Number();
 		// if ((user != null) && (user.getFirstName().length() > 0) &&
 		// (phoneNumber != null)
 		// && phoneNumber.equals(user.getPhoneNumber()) &&
