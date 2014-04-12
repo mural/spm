@@ -3,7 +3,7 @@
 	android:textColor="#FFFFFF" android:layout_height="50dp" android:background="#EEEEEE">
 
 	<ImageView android:id="@+id/actionBarLogo" android:layout_width="50dp" android:layout_height="wrap_content"
-		android:src="@drawable/logo_spm" android:padding="5dp" android:layout_centerVertical="true" android:scaleType="fitXY" />
+		android:src="@drawable/logo_spm2" android:padding="5dp" android:layout_centerVertical="true" android:scaleType="fitXY" />
 
 	<TextView android:id="@+id/actionBarTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:text="@string/appName" android:textSize="18dp" android:padding="3dp" android:layout_centerVertical="true"

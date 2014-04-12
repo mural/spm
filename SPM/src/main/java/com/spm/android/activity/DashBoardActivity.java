@@ -56,7 +56,7 @@ public class DashBoardActivity extends AbstractActivity {
 	@InjectView(R.id.map)
 	private Button map;
 
-	boolean justCreated = true;
+	boolean justCreated;
 
 	/**
 	 * @see com.spm.android.common.activity.AbstractActivity#onCreate(android.os.Bundle)
@@ -102,7 +102,7 @@ public class DashBoardActivity extends AbstractActivity {
 				// testApi();
 			}
 		});
-
+		justCreated = true;
 	}
 
 	private void testApi() {
@@ -202,7 +202,7 @@ public class DashBoardActivity extends AbstractActivity {
 			Application.APPLICATION_PROVIDER.get().attach(user);
 			// AndroidApplication.get().logout(); //TODO waht ? ?¡
 		} else {
-			userName.setText("Bienvenido: " + user.getFirstName());
+			userName.setText("Bienvenido/a: " + user.getFirstName());
 		}
 
 		updateDate();

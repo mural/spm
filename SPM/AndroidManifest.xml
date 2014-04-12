@@ -12,7 +12,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="19" />
 
     <supports-screens
         android:anyDensity="true"
@@ -88,7 +88,7 @@
     <application
         android:name=".android.SPMApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo_spm"
+        android:icon="@drawable/logo_spm2"
         android:label="@string/appName"
         android:theme="@style/MyThemeWihoutTitle" >
         <activity android:name=".android.activity.SplashActivity" >

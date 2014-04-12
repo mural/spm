@@ -7,6 +7,6 @@
 		android:ellipsize="end" android:padding="5dp" style="@style/rowContent" 
 		android:layout_toLeftOf="@+id/arrow" />
 		
-	<ImageView android:id="@+id/arrow" style="@style/rowArrow" />
+	<!-- <ImageView android:id="@+id/arrow" style="@style/rowArrow" /> -->
 
 </RelativeLayout>
