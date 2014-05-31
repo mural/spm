@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.google.inject.internal.Lists;
 import com.spm.R;
@@ -48,6 +49,9 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 	@InjectView(R.id.actionBar)
 	private ActionBar actionBar;
 
+	@InjectView(R.id.totales)
+	private TextView totales;
+
 	public final static int REQUEST_CODE = IdGenerator.getIntId();
 	public final static String PRODUCT = "PRODUCT";
 
@@ -62,16 +66,18 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 		actionBar.setTitle(LocalizationUtils.getString(R.string.dtoClient,
 				dto.toString()));
 
-		productsUseCase = (ProductsUseCase) getLastNonConfigurationInstance();
-		if (productsUseCase == null) {
-			productsUseCase = getInstance(ProductsUseCase.class);
-		}
+		// productsUseCase = (ProductsUseCase)
+		// getLastNonConfigurationInstance();
+		// if (productsUseCase == null) {
+		productsUseCase = getInstance(ProductsUseCase.class);
+		productsUseCase.clearProducts();
+		// }
 
 		productsUseCase.addListener(this);
-		if (productsUseCase.isNotInvoked()) {
-			// productsUseCase.setLineId(lineId);
-			executeUseCase(productsUseCase);
-		} else if (productsUseCase.isInProgress()) {
+		// if (productsUseCase.isNotInvoked()) {
+		// productsUseCase.setLineId(lineId);
+		executeUseCase(productsUseCase);
+		if (productsUseCase.isInProgress()) {
 			onStartUseCase();
 		} else if (productsUseCase.isFinishSuccessful()) {
 			onFinishUseCase();
@@ -111,13 +117,14 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 		}
 	}
 
-	/**
-	 * @see roboguice.activity.RoboListActivity#onRetainNonConfigurationInstance()
-	 */
-	@Override
-	public Object onRetainNonConfigurationInstance() {
-		return productsUseCase;
-	}
+	// /**
+	// * @see
+	// roboguice.activity.RoboListActivity#onRetainNonConfigurationInstance()
+	// */
+	// @Override
+	// public Object onRetainNonConfigurationInstance() {
+	// return productsUseCase;
+	// }
 
 	/**
 	 * @see com.splatt.android.common.activity.AbstractListActivity#onListItemClick(java.lang.Object)
@@ -138,10 +145,13 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 	 */
 	@Override
 	public void onFinishUseCase() {
+		List<Product> products = productsUseCase.getProducts();
+		for (Product product : products) {
+			product.setQuantity(0);
+		}
 
-		productsAdapter = new ProductsAdapter(this,
-				productsUseCase.getProducts(),
-				productsUseCase.getSelectedItems(), dto, client);
+		productsAdapter = new ProductsAdapter(this, products,
+				productsUseCase.getSelectedItems(), dto, client, totales);
 		executeOnUIThread(new Runnable() {
 
 			@Override

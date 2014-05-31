@@ -3,6 +3,7 @@ package com.spm.android.activity;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
 import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
 import com.google.inject.internal.Sets;
@@ -17,28 +18,28 @@ import com.spm.service.APIService;
  * @author Agustin Sgarlata
  */
 public class ProductsUseCase extends DefaultAbstractUseCase {
-	
+
 	private List<Product> products = Lists.newArrayList();
 	// private Long lineId;
-	
+
 	private Set<Product> selectedItems = Sets.newHashSet();
-	
+
 	private ProductRepository productRepository;
-	
+
 	@Inject
-	public ProductsUseCase(APIService apiService, ProductRepository productRepository) {
+	public ProductsUseCase(APIService apiService,
+			ProductRepository productRepository) {
 		super(apiService);
 		this.productRepository = productRepository;
 	}
-	
+
 	/**
 	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
 	 */
 	@Override
 	protected void doExecute() {
-		// Product product = new Product(null, null, lineId, null);
-		
-		// This logic in DETAIL ORDER ACTIVITY!!! (and use the common one for this...)
+		// This logic in DETAIL ORDER ACTIVITY!!! (and use the common one for
+		// this...)
 		// List<Product> newProducts = productRepository.get(product);
 		List<Product> newProducts = productRepository.getAll();
 		for (Product productToAdd : newProducts) {
@@ -54,7 +55,7 @@ public class ProductsUseCase extends DefaultAbstractUseCase {
 			}
 		}
 	}
-	
+
 	/**
 	 * @return the products
 	 */
@@ -62,19 +63,28 @@ public class ProductsUseCase extends DefaultAbstractUseCase {
 		Collections.sort(products);
 		return products;
 	}
-	
+
+	/**
+	 * @return clear the products
+	 */
+	public void clearProducts() {
+		for (Product product : products) {
+			product.setQuantity(0);
+		}
+	}
+
 	// /**
 	// * @param lineId the lineId to set
 	// */
 	// public void setLineId(Long lineId) {
 	// this.lineId = lineId;
 	// }
-	
+
 	/**
 	 * @return the selected Products
 	 */
 	public Set<Product> getSelectedItems() {
 		return selectedItems;
 	}
-	
+
 }

@@ -46,9 +46,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:background="@drawable/button_flat_inverted"
-                android:text="Sincronizar"
+                android:text="Sincronizar Pedidos"
                 android:textColor="@android:color/white"
-                android:textSize="42sp" />
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/clientes"
@@ -56,18 +56,20 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:background="@drawable/button_flat_inverted"
-                android:text="Visitas"
+                android:text="Pedidos"
                 android:textColor="@android:color/white"
-                android:textSize="42sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
-                android:text="Actualizar"
-                android:textSize="42sp"
-                android:visibility="gone" />
+                android:background="@drawable/button_flat_inverted"
+                android:textColor="@android:color/white"
+                android:text="@string/resync"
+                android:textSize="24sp"
+                android:visibility="invisible" />
         </LinearLayout>
     </ScrollView>
 
@@ -81,7 +83,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/priceDate"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold" />
 

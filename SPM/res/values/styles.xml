@@ -3,6 +3,7 @@
 
     <style name="MyThemeWihoutTitle" parent="Theme.Sherlock.Light"> 
         <item name="android:windowNoTitle">true</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
 	<style name="defaultTheme" parent="@android:style/Theme.NoTitleBar">

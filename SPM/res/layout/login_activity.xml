@@ -24,6 +24,7 @@
         android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
         android:nextFocusDown="@+id/loginButton"
         android:singleLine="true" >
 

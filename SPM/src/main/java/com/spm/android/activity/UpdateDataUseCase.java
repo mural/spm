@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
+import com.spm.android.common.AndroidApplication;
 import com.spm.common.domain.Application;
 import com.spm.common.exception.CommonErrorCode;
 import com.spm.common.usecase.DefaultAbstractUseCase;
@@ -34,6 +35,7 @@ public class UpdateDataUseCase extends DefaultAbstractUseCase {
 		this.productRepository = productRepository;
 		this.clientRepository = clientRepository;
 		this.userRepository = userRepository;
+
 	}
 
 	/**
@@ -62,7 +64,29 @@ public class UpdateDataUseCase extends DefaultAbstractUseCase {
 			// other purpose
 			userRepository.add(user);
 
+			// force activity finish use case
+			try {
+				DashBoardActivity currentActivity = (DashBoardActivity) AndroidApplication
+						.get().getCurrentActivity();
+				currentActivity.onFinishUseCase();
+			} catch (Exception e) {
+
+			}
 		}
+	}
+
+	public boolean isUpdatedData() {
+		User user = Application.APPLICATION_PROVIDER.get().getUser();
+		Date dateOfPriceList = getApiService().getPriceListDate();
+		if ((user != null) && (user.getUpdateDate() != null)
+				&& (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
+			return true;
+		} else if (((user != null) && (user.getUpdateDate() != null) && (dateOfPriceList
+				.compareTo(user.getUpdateDate()) < 0))
+				|| ((user != null) && (user.getUpdateDate() == null))) {
+			return false;
+		}
+		return true;
 	}
 
 }

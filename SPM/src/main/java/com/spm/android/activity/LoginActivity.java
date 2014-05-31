@@ -60,6 +60,12 @@ public class LoginActivity extends AbstractActivity {
 
 		setContentView(R.layout.login_activity);
 
+		String lastUser = SharedPreferencesUtils
+				.loadPreference("lastUserLogged");
+		if (lastUser != null) {
+			username.setText(lastUser);
+		}
+
 		loginButton.setOnClickListener(new AsyncOnClickListener() {
 
 			@Override
@@ -168,6 +174,8 @@ public class LoginActivity extends AbstractActivity {
 
 			@Override
 			public void run() {
+				SharedPreferencesUtils.savePreference("lastUserLogged",
+						username.getText().toString());
 				dismissLoading();
 				finish();
 				ActivityLauncher.launchActivity(DashBoardActivity.class);

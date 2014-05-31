@@ -78,17 +78,6 @@ public class SyncActivity extends AbstractListActivity<Work> {
 				syncUseCase = getInstance(SyncUseCase.class);
 			}
 
-			syncUseCase.addListener(this);
-			if (syncUseCase != null) {
-				executeUseCase(syncUseCase);
-			} else if (syncUseCase.isInProgress()) {
-				onStartUseCase();
-			} else if (syncUseCase.isFinishSuccessful()) {
-				onFinishUseCase();
-			} else if (syncUseCase.isFinishFailed()) {
-				onFinishUseCase();
-			}
-
 			actionBar.reset();
 			actionBar.addImageViewAction(R.drawable.ic_check,
 					new OnClickListener() {
@@ -187,6 +176,17 @@ public class SyncActivity extends AbstractListActivity<Work> {
 		} else if (!Application.APPLICATION_PROVIDER.get().getUser()
 				.checkValidDate()) {
 			AndroidApplication.get().logout();
+		}
+
+		syncUseCase.addListener(this);
+		if (syncUseCase != null) {
+			executeUseCase(syncUseCase);
+		} else if (syncUseCase.isInProgress()) {
+			onStartUseCase();
+		} else if (syncUseCase.isFinishSuccessful()) {
+			onFinishUseCase();
+		} else if (syncUseCase.isFinishFailed()) {
+			onFinishUseCase();
 		}
 	}
 

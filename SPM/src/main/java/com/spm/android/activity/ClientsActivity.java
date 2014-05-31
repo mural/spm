@@ -1,6 +1,8 @@
 package com.spm.android.activity;
 
 import roboguice.inject.InjectView;
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.spm.R;
@@ -27,12 +29,18 @@ public class ClientsActivity extends AbstractListActivity<Client> {
 	/**
 	 * @see com.splatt.android.common.activity.AbstractListActivity#onCreate(android.os.Bundle)
 	 */
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.clients_activity);
 
 		actionBar.setTitle("Clientes");
+
+		getListView().setFastScrollEnabled(true);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getListView().setFastScrollAlwaysVisible(true);
+		}
 
 		categoriesUseCase = (ClientsUseCase) getLastNonConfigurationInstance();
 		if (categoriesUseCase == null) {

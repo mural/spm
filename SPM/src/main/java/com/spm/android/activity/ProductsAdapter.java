@@ -30,6 +30,8 @@ public class ProductsAdapter extends
 	private Set<Product> selectedProducts;
 	private Double dto;
 	private Client client;
+	TextView totales;
+	Double precioTotal = new Double(0);
 
 	/**
 	 * @param context
@@ -39,11 +41,13 @@ public class ProductsAdapter extends
 	 * @param client
 	 */
 	public ProductsAdapter(Activity context, List<Product> products,
-			Set<Product> selectedProducts, Double dto, Client client) {
+			Set<Product> selectedProducts, Double dto, Client client,
+			TextView totales) {
 		super(context, products, R.layout.product_row);
 		this.selectedProducts = selectedProducts;
 		this.dto = dto;
 		this.client = client;
+		this.totales = totales;
 	}
 
 	/**
@@ -74,7 +78,7 @@ public class ProductsAdapter extends
 			price = new Double(0);
 		}
 
-		Double priceDto = price * (1 - (dto / 100));
+		final Double priceDto = price * (1 - (dto / 100));
 
 		BigDecimal priceDtoBig = new BigDecimal(priceDto.toString());
 		priceDtoBig = priceDtoBig.setScale(2, RoundingMode.HALF_UP);
@@ -123,6 +127,12 @@ public class ProductsAdapter extends
 					holder.checked.setChecked(false);
 					selectedProducts.remove(product);
 				}
+				precioTotal -= priceDto;
+				BigDecimal precioTotalBig = new BigDecimal(precioTotal
+						.toString());
+				precioTotalBig = precioTotalBig.setScale(2,
+						RoundingMode.HALF_UP);
+				totales.setText("Total en $: " + precioTotalBig.toString());
 			}
 		});
 
@@ -139,7 +149,7 @@ public class ProductsAdapter extends
 				}
 				return false;
 			}
-		}); // TODO: no sirve asi, usr como stackovwerflor
+		}); // TODO: no sirve asi, corregir
 
 		holder.plus.setOnClickListener(new OnClickListener() {
 
@@ -155,6 +165,12 @@ public class ProductsAdapter extends
 					holder.checked.setChecked(true);
 					selectedProducts.add(product);
 				}
+				precioTotal += priceDto;
+				BigDecimal precioTotalBig = new BigDecimal(precioTotal
+						.toString());
+				precioTotalBig = precioTotalBig.setScale(2,
+						RoundingMode.HALF_UP);
+				totales.setText("Total en $: " + precioTotalBig.toString());
 			}
 		});
 	}

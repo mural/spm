@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
@@ -29,6 +30,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.inject.internal.Sets;
 import com.spm.R;
 import com.spm.android.common.ActivityLauncher;
 import com.spm.android.common.AndroidApplication;
@@ -36,6 +38,7 @@ import com.spm.android.common.AndroidUseCaseListener;
 import com.spm.android.common.activity.AbstractListActivity;
 import com.spm.android.common.activity.ActivityIf;
 import com.spm.android.common.dialog.NumDialog;
+import com.spm.android.common.utils.AlertDialogUtils;
 import com.spm.android.common.utils.LocalizationUtils;
 import com.spm.android.common.utils.ToastUtils;
 import com.spm.android.common.view.ActionBar;
@@ -45,6 +48,7 @@ import com.spm.domain.Order;
 import com.spm.domain.OrderItem;
 import com.spm.domain.Product;
 import com.spm.domain.User;
+import com.spm.domain.Work;
 
 /**
  * 
@@ -57,6 +61,9 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 
 	private UpdateOrderUseCase updateOrderUseCase;
 	private UpdateOrderUseCaseListener updateOrderCaseListener;
+
+	private SyncDataUseCase syncDataUseCase;
+	private SyncDataUseCaseListener syncDataUseCaseListener;
 
 	public final static String ORDER = "order";
 	public static final String CLIENT = "client";
@@ -115,8 +122,6 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 		}
 		detailOrderUseCase.addListener(this);
 
-		// updateOrderUseCase =
-		// (UpdateOrderUseCase)getLastNonConfigurationInstance();
 		if (updateOrderUseCase == null) {
 			updateOrderUseCase = getInstance(UpdateOrderUseCase.class);
 		}
@@ -159,9 +164,6 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 						&& (estado.getSelectedItem() != null)) {
 					order.modifyStatus(estado.getSelectedItem().toString());
 					updateOrderUseCase.setOrder(order);
-					// executeUseCase(updateOrderUseCase);
-					// detailOrderUseCase.updateOrder(order);
-					// executeUseCase(detailOrderUseCase);
 					updatePrices();
 				}
 			}
@@ -217,9 +219,6 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 					}
 
 					updateOrderUseCase.setOrder(order);
-					// executeUseCase(updateOrderUseCase);
-					// detailOrderUseCase.updateOrder(order);
-					// executeUseCase(detailOrderUseCase);
 					updatePrices();
 				}
 			}
@@ -245,20 +244,35 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 									ProductsActivity.REQUEST_CODE);
 						}
 					});
+
+			actionBar.addImageViewAction(R.drawable.ic_check,
+					new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							syncConfirm();
+						}
+					});
+
+			if (syncDataUseCase == null) {
+				syncDataUseCase = getInstance(SyncDataUseCase.class);
+			}
+			syncDataUseCaseListener = new SyncDataUseCaseListener();
+			syncDataUseCase.addListener(syncDataUseCaseListener);
 		}
 
-		actionBar.addImageViewAction(R.drawable.ic_sync_bl,
-				new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						Bundle bundle = new Bundle();
-						ActivityLauncher.launchActivity(SyncActivity.class,
-								bundle);
-					}
-				});
-
-		registerForContextMenu(getListView());
+		// actionBar.addImageViewAction(R.drawable.ic_sync_bl,
+		// new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// Bundle bundle = new Bundle();
+		// ActivityLauncher.launchActivity(SyncActivity.class,
+		// bundle);
+		// }
+		// });
+		//
+		// registerForContextMenu(getListView());
 	}
 
 	private Boolean canEdit() {
@@ -314,8 +328,6 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 									} else {
 										orderItemTop.setQuantity(0);
 									}
-									// detailOrderUseCase.updateOrder(order);
-									// executeUseCase(detailOrderUseCase);
 									updateOrderUseCase.setOrder(order);
 									executeUseCase(updateOrderUseCase);
 									updatePrices();
@@ -355,9 +367,6 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 		detailOrdersAdapter = new DetailOrderAdapter(DetailOrderActivity.this,
 				orderItems);
 		setListAdapter(detailOrdersAdapter);
-		// subTotalInt = new BigDecimal(subTotalInt.multiply(
-		// new BigDecimal(1 - (new Double(user.getDiscount()) /
-		// 100))).toString()).setScale(2, 2);
 
 		Double discount = Double.valueOf(1 - (client.getDiscount()
 				.doubleValue() / 100));
@@ -491,22 +500,6 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 				.checkValidDate()) {
 			AndroidApplication.get().logout();
 		}
-
-		// if (detailOrderUseCase.isNotInvoked()) {
-
-		// if (detailOrderUseCase != null) {
-		// if (order != null) {
-		// detailOrderUseCase.setOrder(order);
-		// }
-		// detailOrderUseCase.setClientId(client.getId());
-		// executeUseCase(detailOrderUseCase);
-		// } else if (detailOrderUseCase.isInProgress()) {
-		// onStartUseCase();
-		// } else if (detailOrderUseCase.isFinishSuccessful()) {
-		// onFinishUseCase();
-		// } else if (detailOrderUseCase.isFinishFailed()) {
-		// onFinishUseCase();
-		// }
 	}
 
 	/**
@@ -592,5 +585,51 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 		protected ActivityIf getActivityIf() {
 			return DetailOrderActivity.this;
 		}
+	}
+
+	private class SyncDataUseCaseListener extends AndroidUseCaseListener {
+
+		@Override
+		public void onFinishUseCase() {
+			dismissLoading();
+			ToastUtils.showToastOnUIThread("Datos sincronizados: "
+					+ syncDataUseCase.result);
+
+			Bundle bundle = new Bundle();
+			ActivityLauncher.launchActivity(SyncActivity.class, bundle);
+		}
+
+		/**
+		 * @see com.spm.android.common.AndroidUseCaseListener#getActivityIf()
+		 */
+		@Override
+		protected ActivityIf getActivityIf() {
+			return DetailOrderActivity.this;
+		}
+	}
+
+	private void syncConfirm() {
+		final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Set<Work> works = Sets.newHashSet();
+				works.add(order);
+
+				syncDataUseCase.works = works;
+				executeUseCase(syncDataUseCase);
+			}
+		};
+
+		executeOnUIThread(new Runnable() {
+
+			@Override
+			public void run() {
+				AlertDialogUtils.showOkCancelDialog(dialogClickListener,
+						R.string.confirmSyncOrderTitle,
+						R.string.confirmSyncOrderMsg, R.string.syncOrder,
+						R.string.notSyncOrder);
+			}
+		});
 	}
 }

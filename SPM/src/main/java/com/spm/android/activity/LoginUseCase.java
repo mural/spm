@@ -34,7 +34,7 @@ public class LoginUseCase extends DefaultAbstractUseCase {
 	protected void doExecute() {
 		// String name = getApiService().getContacts();
 		try {
-			user = userRepository.getByName(username);
+			user = userRepository.getByName(username.trim());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

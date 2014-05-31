@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.spm.android.common.AndroidApplication;
 import com.spm.android.common.view.ActionBar;
 import com.spm.common.exception.AndroidException;
@@ -18,10 +19,11 @@ import com.spm.common.usecase.DefaultUseCase;
  * 
  * @author Luciano Rey
  */
-public abstract class AbstractActivity extends RoboActivity implements ActivityIf {
-	
+public abstract class AbstractActivity extends RoboActivity implements
+		ActivityIf {
+
 	private BaseActivity baseActivity;
-	
+
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -31,7 +33,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		baseActivity = AndroidApplication.get().createBaseActivity(this);
 		baseActivity.onCreate();
 	}
-	
+
 	/**
 	 * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
 	 */
@@ -40,7 +42,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		super.onSaveInstanceState(outState);
 		baseActivity.onSaveInstanceState(outState);
 	}
-	
+
 	/**
 	 * @see android.app.Activity#onRestoreInstanceState(android.os.Bundle)
 	 */
@@ -49,7 +51,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		super.onRestoreInstanceState(savedInstanceState);
 		baseActivity.onRestoreInstanceState(savedInstanceState);
 	}
-	
+
 	/**
 	 * @see roboguice.activity.GuiceActivity#onStart()
 	 */
@@ -58,7 +60,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		super.onStart();
 		baseActivity.onStart();
 	}
-	
+
 	/**
 	 * @see roboguice.activity.GuiceActivity#onResume()
 	 */
@@ -67,7 +69,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		super.onResume();
 		baseActivity.onResume();
 	}
-	
+
 	/**
 	 * @see roboguice.activity.RoboActivity#onPause()
 	 */
@@ -76,7 +78,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		super.onPause();
 		baseActivity.onPause();
 	}
-	
+
 	/**
 	 * @see roboguice.activity.RoboActivity#onStop()
 	 */
@@ -85,7 +87,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		super.onStop();
 		baseActivity.onStop();
 	}
-	
+
 	/**
 	 * @see roboguice.activity.RoboActivity#onDestroy()
 	 */
@@ -94,16 +96,17 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 		super.onDestroy();
 		baseActivity.onDestroy();
 	}
-	
+
 	/**
-	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 * @see android.app.Activity#onActivityResult(int, int,
+	 *      android.content.Intent)
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		baseActivity.onActivityResult(requestCode, resultCode, data);
 	}
-	
+
 	/**
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
@@ -111,7 +114,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return baseActivity.onCreateOptionsMenu(menu);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#hasOptionsMenu()
 	 */
@@ -119,7 +122,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public boolean hasOptionsMenu() {
 		return baseActivity.hasOptionsMenu();
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#getMenuResourceId()
 	 */
@@ -127,7 +130,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public int getMenuResourceId() {
 		return baseActivity.getMenuResourceId();
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#doOnCreateOptionsMenu(android.view.Menu)
 	 */
@@ -135,25 +138,26 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void doOnCreateOptionsMenu(Menu menu) {
 		baseActivity.doOnCreateOptionsMenu(menu);
 	}
-	
+
 	/**
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// REVIEW See if this is the correct approach
-		return baseActivity.onOptionsItemSelected(item) ? true : super.onOptionsItemSelected(item);
+		return baseActivity.onOptionsItemSelected(item) ? true : super
+				.onOptionsItemSelected(item);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.fragment.FragmentIf#findView(int)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public <V extends View> V findView(int id) {
-		return (V)findViewById(id);
+		return (V) findViewById(id);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#showLoadingOnUIThread()
 	 */
@@ -161,7 +165,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void showLoadingOnUIThread() {
 		baseActivity.showLoadingOnUIThread();
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#showLoadingOnUIThread(java.lang.Boolean)
 	 */
@@ -169,7 +173,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void showLoadingOnUIThread(Boolean cancelable) {
 		baseActivity.showLoadingOnUIThread(cancelable);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#showLoading()
 	 */
@@ -177,7 +181,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void showLoading() {
 		baseActivity.showLoading();
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#showLoading(java.lang.Boolean)
 	 */
@@ -185,7 +189,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void showLoading(Boolean cancelable) {
 		baseActivity.showLoading(cancelable);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#dismissLoading()
 	 */
@@ -193,7 +197,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void dismissLoading() {
 		baseActivity.dismissLoading();
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#dismissLoadingOnUIThread()
 	 */
@@ -201,7 +205,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void dismissLoadingOnUIThread() {
 		baseActivity.dismissLoadingOnUIThread();
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#executeOnUIThread(java.lang.Runnable)
 	 */
@@ -209,7 +213,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void executeOnUIThread(Runnable runnable) {
 		baseActivity.executeOnUIThread(runnable);
 	}
-	
+
 	/**
 	 * @see android.content.DialogInterface.OnCancelListener#onCancel(android.content.DialogInterface)
 	 */
@@ -217,7 +221,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void onCancel(DialogInterface dialog) {
 		baseActivity.onCancel(dialog);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.fragment.FragmentIf#inflate(int)
 	 */
@@ -225,7 +229,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public View inflate(int resource) {
 		return baseActivity.inflate(resource);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#getInstance(java.lang.Class)
 	 */
@@ -233,15 +237,15 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public <I> I getInstance(Class<I> clazz) {
 		return baseActivity.getInstance(clazz);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#getExtra(java.lang.String)
 	 */
 	@Override
 	public <E> E getExtra(String key) {
-		return baseActivity.<E>getExtra(key);
+		return baseActivity.<E> getExtra(key);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#executeUseCase(com.spm.common.usecase.DefaultUseCase)
 	 */
@@ -249,7 +253,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void executeUseCase(DefaultUseCase<?> useCase) {
 		baseActivity.executeUseCase(useCase);
 	}
-	
+
 	/**
 	 * @see com.spm.common.usecase.listener.DefaultUseCaseListener#onStartUseCase()
 	 */
@@ -257,7 +261,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void onStartUseCase() {
 		baseActivity.onStartUseCase();
 	}
-	
+
 	/**
 	 * @see com.spm.common.usecase.listener.DefaultUseCaseListener#onFinishUseCase()
 	 */
@@ -265,7 +269,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void onFinishUseCase() {
 		baseActivity.onFinishUseCase();
 	}
-	
+
 	/**
 	 * @see com.spm.common.usecase.listener.DefaultUseCaseListener#onFinishFailedUseCase(com.spm.common.exception.AndroidException)
 	 */
@@ -273,7 +277,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public void onFinishFailedUseCase(AndroidException androidException) {
 		baseActivity.onFinishFailedUseCase(androidException);
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#isAuthenticated()
 	 */
@@ -281,7 +285,7 @@ public abstract class AbstractActivity extends RoboActivity implements ActivityI
 	public Boolean isAuthenticated() {
 		return baseActivity.isAuthenticated();
 	}
-	
+
 	/**
 	 * @see com.spm.android.common.activity.ActivityIf#getActionBarLegacy()
 	 */
