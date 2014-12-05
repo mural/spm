@@ -151,7 +151,7 @@ public class DashBoardActivity extends AbstractActivity {
 					updated = true;
 					// datos actualizados a la ultima version de la base
 					clientes.setBackgroundResource(R.drawable.button_flat_inverted);
-					update.setVisibility(View.INVISIBLE);
+					update.setBackgroundResource(R.drawable.button_flat_inverted);
 
 					// dismissLoading();
 					ToastUtils.showToastOnUIThread("Datos actualizados");
@@ -260,10 +260,10 @@ public class DashBoardActivity extends AbstractActivity {
 						if (updated) {
 							// datos actualizados a la ultima version de la base
 							clientes.setBackgroundResource(R.drawable.button_flat_inverted);
-							update.setVisibility(View.INVISIBLE);
+							update.setBackgroundResource(R.drawable.button_flat_inverted);
 						} else {
 							clientes.setBackgroundResource(R.drawable.button_cancel);
-							update.setVisibility(View.VISIBLE);
+							update.setBackgroundResource(R.drawable.button_cancel);
 						}
 					}
 				};

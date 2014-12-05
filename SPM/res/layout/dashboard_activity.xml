@@ -69,7 +69,7 @@
                 android:textColor="@android:color/white"
                 android:text="@string/resync"
                 android:textSize="24sp"
-                android:visibility="invisible" />
+                android:visibility="visible" />
         </LinearLayout>
     </ScrollView>
 
