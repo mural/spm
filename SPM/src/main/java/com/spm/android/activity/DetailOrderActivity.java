@@ -48,6 +48,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -72,6 +74,8 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
     private Order order;
 
     @InjectExtra(value = CLIENT)
+    private Long clientId;
+
     private Client client;
 
     @InjectView(R.id.actionBar)
@@ -101,6 +105,8 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
     @InjectView(R.id.orderNum)
     private TextView orderNum;
 
+    Realm realm;
+
     /**
      * @see com.spm.android.common.activity.AbstractActivity#onCreate(android.os.Bundle)
      */
@@ -108,6 +114,17 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_order_activity);
+
+        // Initialize Realm
+        Realm.init(this);
+        // Get a Realm instance for this thread
+        realm = Realm.getDefaultInstance();
+        // Build the query looking at all users:
+        RealmQuery<Client> query = realm.where(Client.class);
+        // Add query conditions:
+        query.equalTo("id", clientId);
+        // Execute the query:
+        client = query.findFirst();
 
         // boolean giro = savedInstanceState.getBoolean("GIRO");
         if (savedInstanceState != null) {
@@ -238,7 +255,7 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
                             Bundle bundle = new Bundle();
                             bundle.putDouble(ProductsActivity.DTO, discount);
                             bundle.putSerializable(ProductsActivity.CLIENT,
-                                    client);
+                                    clientId);
                             ActivityLauncher.launchActivity(
                                     ProductsActivity.class, bundle,
                                     ProductsActivity.REQUEST_CODE);
@@ -256,6 +273,7 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 
             if (syncDataUseCase == null) {
                 syncDataUseCase = getInstance(SyncDataUseCase.class);
+                syncDataUseCase.setClientId(clientId);
             }
             syncDataUseCaseListener = new SyncDataUseCaseListener();
             syncDataUseCase.addListener(syncDataUseCaseListener);
@@ -272,7 +290,8 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
         // }
         // });
         //
-        // registerForContextMenu(getListView());
+
+        registerForContextMenu(getListView());
     }
 
     private Boolean canEdit() {
@@ -303,7 +322,7 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
 
         if (canEdit()) {
             orderItemTop = orderItem;
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialogTheme);
             input = new EditText(this);
             input.setText(orderItem.getQuantity().toString());
             input.setTextColor(getResources().getColor(R.color.textColor));
@@ -408,10 +427,6 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
         });
     }
 
-    /**
-     * @see com.splatt.android.common.activity.AbstractActivity#onActivityResult(int,
-     * int, android.content.Intent)
-     */
     @SuppressWarnings("unchecked")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -500,14 +515,12 @@ public class DetailOrderActivity extends AbstractListActivity<OrderItem> {
         }
     }
 
-    /**
-     * @see com.splatt.android.common.activity.AbstractListActivity#onDestroy()
-     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
         detailOrderUseCase.removeListener(this);
         updateOrderUseCase.removeListener(updateOrderCaseListener);
+        realm.close();
     }
 
     @Override

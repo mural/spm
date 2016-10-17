@@ -356,77 +356,81 @@ public class APIServiceImpl implements APIService {
                     descuento = subtotal * (client.getDiscount2() / 100);
                 }
 
+                int id = getLastIdfromTable("_INT_PED_VEN", con) + 1;
                 ps = con.prepareStatement(
-                        "INSERT INTO _INT_PED_VEN (FECHA, FEC_ENTREGA, FK_ERP_EMPRESAS, NUMERO, FK_ERP_ASESORES, "
+                        "INSERT INTO _INT_PED_VEN (ID, FECHA, FEC_ENTREGA, FK_ERP_EMPRESAS, NUMERO, FK_ERP_ASESORES, "
                                 + "TIPO_DE_PEDIDO, ENTREGADO, FK_ERP_CON_VEN, FK_ERP_DEPOSITOS, FK_ERP_MONEDAS, "
                                 + "IMP_SUBTOTAL, IMP_DESCUENTO, IMP_TOTAL, FK_ERP_LIS_PRECIO, COORDENADAS, DESCRIPCION) "
-                                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         Statement.RETURN_GENERATED_KEYS);
-                ps.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+                ps.setInt(1, id);
+                ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
                 if (order.getStatus().equals("Entregado")) {
-                    ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+                    ps.setDate(3, new java.sql.Date(System.currentTimeMillis()));
                 } else {
-                    ps.setDate(2, new java.sql.Date(System.currentTimeMillis()
+                    ps.setDate(3, new java.sql.Date(System.currentTimeMillis()
                             + (259200 * 1000))); // 3 days
                 }
-                ps.setString(3, order.getClientId().toString());
-                ps.setString(4, order.getNumber());
-                ps.setString(5, order.getUserId().toString());
+                ps.setString(4, order.getClientId().toString());
+                ps.setString(5, order.getNumber());
+                ps.setString(6, order.getUserId().toString());
 
-                ps.setString(6, order.getType());
-                ps.setString(7, order.getStatus());
-                ps.setInt(8, 3); // to define...FK_ERP_CON_VEN
-                ps.setInt(9, 1); // to define...FK_ERP_DEPOSITOS
-                ps.setInt(10, 1); // pesos FK_ERP_MONEDAS
+                ps.setString(7, order.getType());
+                ps.setString(8, order.getStatus());
+                ps.setInt(9, 3); // to define...FK_ERP_CON_VEN
+                ps.setInt(10, 1); // to define...FK_ERP_DEPOSITOS
+                ps.setInt(11, 1); // pesos FK_ERP_MONEDAS
 
                 if (order.getType().equals(Order.NORMAL)) {
                     subtotal = subtotal
                             - (subtotal * (client.getDiscount() / 100));
-                    ps.setDouble(11, subtotal); // subtotal * dto
+                    ps.setDouble(12, subtotal); // subtotal * dto
                 } else {
                     subtotal = subtotal
                             - (subtotal * (client.getDiscount2() / 100));
-                    ps.setDouble(11, subtotal); // subtotal * dto
+                    ps.setDouble(12, subtotal); // subtotal * dto
                 }
-                ps.setDouble(12, descuento); // dto
+                ps.setDouble(13, descuento); // dto
                 if (order.getType().equals(Order.NORMAL)) {
-                    ps.setDouble(13, subtotal * 1.21); // total = subtotal * dto
+                    ps.setDouble(14, subtotal * 1.21); // total = subtotal * dto
                     // + IVA
                 } else {
-                    ps.setDouble(13, subtotal); // total = subtotal * dto
+                    ps.setDouble(14, subtotal); // total = subtotal * dto
                     // (especial sin IVA)
                 }
-                ps.setInt(14, Integer.valueOf(client.getPriceList().toString())); // lista
+                ps.setInt(15, Integer.valueOf(client.getPriceList().toString())); // lista
                 // de
                 // precios
 
                 if (order.getStatus().equals("Entregado")) {
-                    ps.setByte(7, (byte) 1);
+                    ps.setByte(8, (byte) 1);
                 } else {
-                    ps.setByte(7, (byte) 0);
+                    ps.setByte(8, (byte) 0);
                 }
-                ps.setString(15, order.getCoordinates());
-                ps.setString(16, order.getAddress());
+                ps.setString(16, order.getCoordinates());
+                ps.setString(17, order.getAddress());
                 ps.executeUpdate();
 
-                ResultSet idRS = ps.getGeneratedKeys();
-                idRS.next();
-                int id = idRS.getInt("ID");
+//                ResultSet idRS = ps.getGeneratedKeys();
+//                idRS.next();
+//                int id = idRS.getInt("ID");
 
                 for (OrderItem orderItem : order.getProducts()) {
+                    int idd = getLastIdfromTable("_INT_DET_PED_VEN", "IDD", con) + 1;
                     ps = con.prepareStatement(
-                            "INSERT INTO _INT_DET_PED_VEN (FK_ERP_COM_VEN, FK_ERP_ARTICULOS, CAN_COMPRA, PRE_LIS, PRECIO, "
+                            "INSERT INTO _INT_DET_PED_VEN (IDD, FK_ERP_COM_VEN, FK_ERP_ARTICULOS, CAN_COMPRA, PRE_LIS, PRECIO, "
                                     + "IMP_TOT_LIS, IMP_TOTAL) "
-                                    + "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                             Statement.RETURN_GENERATED_KEYS);
-                    ps.setInt(1, id);
-                    ps.setString(2, orderItem.getId().toString());
-                    ps.setInt(3, orderItem.getQuantity());
-                    ps.setDouble(4, 0);
-                    ps.setDouble(5, orderItem.getPrice());
+                    ps.setInt(1, idd);
+                    ps.setInt(2, id);
+                    ps.setString(3, orderItem.getId().toString());
+                    ps.setInt(4, orderItem.getQuantity());
+                    ps.setDouble(5, 0);
+                    ps.setDouble(6, orderItem.getPrice());
 
-                    ps.setDouble(6, 0);
-                    ps.setDouble(7,
+                    ps.setDouble(7, 0);
+                    ps.setDouble(8,
                             orderItem.getPrice() * orderItem.getQuantity());
 
                     ps.executeUpdate();
@@ -495,7 +499,7 @@ public class APIServiceImpl implements APIService {
             System.out.println(se);
 
             if (se.getMessage().equals("No current row in the ResultSet.")) {
-                int id = getLastIdfromTable("_INT_CONT") + 1;
+                int id = getLastIdfromTable("_INT_CONT", con) + 1;
                 PreparedStatement ps = con
                         .prepareStatement("INSERT INTO _INT_CONT (ID, FECHA_SINC, FK_ERP_ASESORES, NUMERO) VALUES (?, ?, ?, ?)");
                 ps.setInt(1, id);
@@ -509,34 +513,35 @@ public class APIServiceImpl implements APIService {
         return Long.valueOf(result);
     }
 
-    //ID column must call ID !
-    private int getLastIdfromTable(String tableName) {
+    private int getLastIdfromTable(String tableName, String idName, Connection con) {
         int id = -1;
         try {
-            Class.forName(driver).newInstance();
-            con = DriverManager.getConnection(url + db, userDB, passDB);
-            con.setAutoCommit(false);
             try {
                 PreparedStatement ps;
                 ps = con.prepareStatement(
-                        "SELECT TOP 1 * FROM " + tableName + " ORDER BY ID DESC");
+                        "SELECT TOP 1 * FROM " + tableName + " ORDER BY " + idName + " DESC");
 
                 ResultSet res = ps.executeQuery();
                 res.next();
-                id = res.getInt("ID");
+                id = res.getInt(idName);
             } catch (SQLException se) {
                 System.out.println("SQL code does not execute.");
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                con.close();
-            } catch (SQLException se) {
-                System.out.println(se);
-            }
+//            try {
+//                con.close();
+//            } catch (SQLException se) {
+//                System.out.println(se);
+//            }
         }
         return id;
+    }
+
+    //ID column must call ID !
+    private int getLastIdfromTable(String tableName, Connection con) {
+        return getLastIdfromTable(tableName, "ID", con);
     }
 
     /**

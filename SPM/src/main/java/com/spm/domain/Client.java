@@ -2,14 +2,23 @@ package com.spm.domain;
 
 import java.io.Serializable;
 import com.spm.common.domain.Entity;
+import com.spm.common.domain.EntityInterface;
 import com.spm.common.domain.FileContent;
+
+import io.realm.RealmModel;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
  * 
  * @author Agustin Sgatlata
  */
-public class Client extends Entity implements Serializable, Comparable<Client> {
-	
+@RealmClass
+public class Client implements Serializable, Comparable<Client>, RealmModel, EntityInterface {
+
+    @PrimaryKey
+    private Long id;
+
 	private String userName;
 	private String firstName;
 	private String lastName;
@@ -19,12 +28,18 @@ public class Client extends Entity implements Serializable, Comparable<Client> {
 	private Double discount;
 	private Double discount2;
 	private Boolean privacy;
-	private FileContent avatar;
 	private Long userId;
 	private Long priceList;
-	
+
+    public Client() {
+    }
+
+    public Client(Long id) {
+        this.id = id;
+    }
+
 	public Client(Long id, String name, Double discount, Long userId) {
-		super(id);
+		this(id);
 		firstName = name;
 		fullName = name;
 		this.discount = discount;
@@ -35,10 +50,6 @@ public class Client extends Entity implements Serializable, Comparable<Client> {
 		this(id, name, discount, userId);
 		this.discount2 = discount2;
 		this.priceList = priceList;
-	}
-	
-	public Client(Long id) {
-		super(id);
 	}
 	
 	public void modify(String name, Double discount, Double discount2, Long userId, Long priceList) {
@@ -64,7 +75,7 @@ public class Client extends Entity implements Serializable, Comparable<Client> {
 	 */
 	public Client(Long id, String userName, String firstName, String lastName, String fullName, String email,
 			Integer age, Boolean privacy) {
-		super(id);
+		this(id);
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -73,7 +84,11 @@ public class Client extends Entity implements Serializable, Comparable<Client> {
 		this.age = age;
 		this.privacy = privacy;
 	}
-	
+
+    public Long getId() {
+        return id;
+    }
+
 	public Integer getAge() {
 		return age;
 	}
@@ -91,10 +106,6 @@ public class Client extends Entity implements Serializable, Comparable<Client> {
 	 */
 	public String getEmail() {
 		return email;
-	}
-	
-	public FileContent getAvatar() {
-		return avatar;
 	}
 	
 	public String getFirstName() {

@@ -1,10 +1,15 @@
 package com.spm.android.activity;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import roboguice.inject.InjectView;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.common.collect.Lists;
 import com.spm.R;
 import com.spm.android.common.ActivityLauncher;
 import com.spm.android.common.AndroidApplication;
@@ -13,6 +18,8 @@ import com.spm.android.common.view.ActionBar;
 import com.spm.common.domain.Application;
 import com.spm.domain.Client;
 import com.spm.domain.User;
+
+import java.util.List;
 
 /**
  * 
@@ -26,9 +33,8 @@ public class ClientsActivity extends AbstractListActivity<Client> {
 	@InjectView(R.id.actionBar)
 	private ActionBar actionBar;
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onCreate(android.os.Bundle)
-	 */
+	Realm realm;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +90,6 @@ public class ClientsActivity extends AbstractListActivity<Client> {
 		return categoriesUseCase;
 	}
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onListItemClick(java.lang.Object)
-	 */
 	@Override
 	protected void onListItemClick(final Client client) {
 		super.onListItemClick(client);
@@ -97,7 +100,7 @@ public class ClientsActivity extends AbstractListActivity<Client> {
 		// @Override
 		// public void onClick(DialogInterface dialog, int which) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(OrdersActivity.CLIENT, client);
+		bundle.putLong(OrdersActivity.CLIENT, client.getId());
 		ActivityLauncher.launchActivity(OrdersActivity.class, bundle);
 		// }
 		// };
@@ -129,25 +132,35 @@ public class ClientsActivity extends AbstractListActivity<Client> {
 	 */
 	@Override
 	public void onFinishUseCase() {
-
-		categoriesAdapter = new ClientsAdapter(this,
-				categoriesUseCase.getClients());
 		executeOnUIThread(new Runnable() {
 
 			@Override
 			public void run() {
+				// Initialize Realm
+				Realm.init(getActivity());
+				// Get a Realm instance for this thread
+				realm = Realm.getDefaultInstance();
+				// Build the query looking at all users:
+				RealmQuery<Client> query = realm.where(Client.class);
+				// Execute the query:
+				RealmResults<Client> result1 = query.findAll().sort("firstName");
+				List<Client> clientList = Lists.newArrayList(result1.subList(0, result1.size()));
+				categoriesAdapter = new ClientsAdapter(getActivity(), clientList);
+
 				setListAdapter(categoriesAdapter);
 				dismissLoading();
 			}
 		});
 	}
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onDestroy()
-	 */
+	public Activity getActivity() {
+		return this;
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		categoriesUseCase.removeListener(this);
+		realm.close();
 	}
 }

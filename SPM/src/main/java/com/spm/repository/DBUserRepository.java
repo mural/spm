@@ -47,10 +47,7 @@ public class DBUserRepository extends DbProvider<User> implements UserRepository
 		ObjectSet<User> result = query.execute();
 		return result.get(0);
 	}
-	
-	/**
-	 * @see com.spm.common.repository.Repository#add(com.spm.common.domain.Entity)
-	 */
+
 	@Override
 	public void add(User entityToAdd) {
 		User entity;
@@ -81,10 +78,7 @@ public class DBUserRepository extends DbProvider<User> implements UserRepository
 			add(user);
 		}
 	}
-	
-	/**
-	 * @see com.spm.common.repository.Repository#remove(com.spm.common.domain.Entity)
-	 */
+
 	@Override
 	public void remove(User entity) {
 		super.delete(entity);
@@ -120,7 +114,7 @@ public class DBUserRepository extends DbProvider<User> implements UserRepository
 	
 	public void loadInitialData() {
 		removeAll();
-		new DBClientRepository(ctx).removeAll();
+		//new DBClientRepository(ctx).removeAll();
 		db().commit();
 		if (findAll().isEmpty()) {
 			

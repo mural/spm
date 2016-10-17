@@ -1,5 +1,7 @@
 package com.spm.android.activity;
 
+import android.content.Context;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -7,14 +9,17 @@ import com.google.inject.Inject;
 import com.spm.android.common.AndroidApplication;
 import com.spm.common.exception.CommonErrorCode;
 import com.spm.common.usecase.DefaultAbstractUseCase;
+import com.spm.domain.Client;
 import com.spm.domain.Order;
 import com.spm.domain.User;
 import com.spm.domain.Visit;
 import com.spm.domain.Work;
-import com.spm.repository.ClientRepository;
 import com.spm.repository.OrderRepository;
 import com.spm.repository.VisitRepository;
 import com.spm.service.APIService;
+
+import io.realm.Realm;
+import io.realm.RealmQuery;
 
 /**
  * Use case to handle the {@link User}'s login.
@@ -27,22 +32,21 @@ public class SyncDataUseCase extends DefaultAbstractUseCase {
 
 	OrderRepository orderRepository;
 	VisitRepository visitRepository;
-	ClientRepository clientRepository;
 	protected Set<Work> works;
+	Long clientId;
+	Context context;
 
 	@Inject
 	public SyncDataUseCase(APIService apiService,
-			OrderRepository orderRepository, ClientRepository clientRepository,
-			VisitRepository visitRepository) {
+			OrderRepository orderRepository,
+			VisitRepository visitRepository,
+						  Context context) {
 		super(apiService);
 		this.orderRepository = orderRepository;
 		this.visitRepository = visitRepository;
-		this.clientRepository = clientRepository;
+		this.context = context;
 	}
 
-	/**
-	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
-	 */
 	@Override
 	protected void doExecute() {
 
@@ -66,8 +70,17 @@ public class SyncDataUseCase extends DefaultAbstractUseCase {
 			if (work instanceof Order) {
 				if (!((Order) work).getProducts().isEmpty()) {
 
-					sync = getApiService().sync((Order) work,
-							clientRepository.get(((Order) work).getClientId()));
+					// Initialize Realm
+					Realm.init(context);
+					// Get a Realm instance for this thread
+					Realm realm = Realm.getDefaultInstance();
+					// Build the query looking at all users:
+					RealmQuery<Client> query = realm.where(Client.class);
+					query.equalTo("id", ((Order) work).getClientId());
+					// Execute the query:
+					Client client = query.findFirst();
+
+					sync = getApiService().sync((Order) work, realm.copyFromRealm(client));
 
 					if (sync.equals("OK")) {
 						ok++;
@@ -109,5 +122,9 @@ public class SyncDataUseCase extends DefaultAbstractUseCase {
 			result = result
 					.concat("\nLos Pedidos sin productos no se sincronizaron");
 		}
+	}
+
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
 	}
 }

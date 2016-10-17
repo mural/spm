@@ -14,9 +14,7 @@ import com.spm.common.usecase.DefaultAbstractUseCase;
 import com.spm.domain.Order;
 import com.spm.domain.User;
 import com.spm.domain.Visit;
-import com.spm.repository.ClientRepository;
 import com.spm.repository.OrderRepository;
-import com.spm.repository.ProductRepository;
 import com.spm.repository.UserRepository;
 import com.spm.repository.VisitRepository;
 import com.spm.service.APIService;
@@ -32,22 +30,13 @@ public class UpdateUsersUseCase extends DefaultAbstractUseCase {
 
 	UserRepository userRepository;
 	private OrderRepository orderRepository;
-	private VisitRepository visitRepository;
-	ProductRepository productRepository;
-	ClientRepository clientRepository;
 
 	@Inject
 	public UpdateUsersUseCase(APIService apiService,
-			UserRepository userRepository, OrderRepository orderRepository,
-			VisitRepository visitRepository,
-			ProductRepository productRepository,
-			ClientRepository clientRepository) {
+			UserRepository userRepository, OrderRepository orderRepository) {
 		super(apiService);
 		this.userRepository = userRepository;
 		this.orderRepository = orderRepository;
-		this.visitRepository = visitRepository;
-		this.productRepository = productRepository;
-		this.clientRepository = clientRepository;
 	}
 
 	@DebugLog
@@ -74,12 +63,12 @@ public class UpdateUsersUseCase extends DefaultAbstractUseCase {
 					orderRepository.remove(order);
 				}
 			}
-			for (Visit visit : visitRepository.getAll()) {
-				if (visit.getSync()
-						&& (visit.getSyncDate().compareTo(days.getTime()) < 0)) {
-					visitRepository.remove(visit);
-				}
-			}
+//			for (Visit visit : visitRepository.getAll()) {
+//				if (visit.getSync()
+//						&& (visit.getSyncDate().compareTo(days.getTime()) < 0)) {
+//					visitRepository.remove(visit);
+//				}
+//			}
 
 			// TODO necesito saber que usuario es primero antes de traer estos
 			// datos..

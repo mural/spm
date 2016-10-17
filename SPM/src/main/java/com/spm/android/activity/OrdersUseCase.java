@@ -19,7 +19,7 @@ import com.spm.service.APIService;
 public class OrdersUseCase extends DefaultAbstractUseCase {
 	
 	private List<Order> orders = Lists.newArrayList();
-	private Client client;
+	private Long clientId;
 	
 	private OrderRepository orderRepository;
 	
@@ -29,13 +29,11 @@ public class OrdersUseCase extends DefaultAbstractUseCase {
 		this.orderRepository = orderRepository;
 	}
 	
-	/**
-	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
-	 */
+
 	@Override
 	protected void doExecute() {
 		User user = Application.APPLICATION_PROVIDER.get().getUser();
-		Order order = new Order(null, client.getId(), Boolean.FALSE, user.getId());
+		Order order = new Order(null, clientId, Boolean.FALSE, user.getId());
 		orders.clear();
 		orders.addAll(orderRepository.get(order));
 	}
@@ -50,15 +48,15 @@ public class OrdersUseCase extends DefaultAbstractUseCase {
 	/**
 	 * @return the client
 	 */
-	public Client getClient() {
-		return client;
+	public Long getClient() {
+		return clientId;
 	}
 	
 	/**
-	 * @param client the client to set
+	 * @param clientId the client to set
 	 */
-	public void setClient(Client client) {
-		this.client = client;
+	public void setClient(Long clientId) {
+		this.clientId = clientId;
 	}
 	
 	/**

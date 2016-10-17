@@ -64,7 +64,7 @@ public final class AlertDialogUtils {
 	public static void showOKDialog(String title, String message, DialogInterface.OnClickListener onClickListener,
 			String buttonText) {
 		Activity activity = AndroidApplication.get().getCurrentActivity();
-		AlertDialog.Builder downloadDialog = new AlertDialog.Builder(activity);
+		AlertDialog.Builder downloadDialog = new AlertDialog.Builder(activity, R.style.CustomAlertDialogTheme);
 		downloadDialog.setTitle(title);
 		downloadDialog.setMessage(message);
 		downloadDialog.setPositiveButton(buttonText, onClickListener);
@@ -80,7 +80,7 @@ public final class AlertDialogUtils {
 				activity.finish();
 			}
 		};
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.CustomAlertDialogTheme);
 		builder.setTitle(R.string.areYouSure);
 		builder.setMessage(R.string.confirmExit);
 		builder.setPositiveButton(R.string.yes, dialogClickListener);
@@ -91,7 +91,7 @@ public final class AlertDialogUtils {
 	public static void showOkCancelDialog(DialogInterface.OnClickListener dialogClickListener, int title, int message,
 			int positiveButton, int negativeButton) {
 		final Activity activity = AndroidApplication.get().getCurrentActivity();
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.CustomAlertDialogTheme);
 		builder.setTitle(title);
 		builder.setMessage(message);
 		builder.setPositiveButton(positiveButton, dialogClickListener);
@@ -120,7 +120,7 @@ public final class AlertDialogUtils {
 				activity.finish();
 			}
 		};
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.CustomAlertDialogTheme);
 		builder.setTitle(R.string.confirmExitTitle);
 		builder.setMessage(R.string.confirmExitMsg);
 		builder.setPositiveButton(R.string.exit, dialogClickListener);

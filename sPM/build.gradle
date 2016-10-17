@@ -17,6 +17,7 @@ repositories {
 
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'realm-android'
 apply plugin: 'com.jakewharton.hugo'
 
 android {

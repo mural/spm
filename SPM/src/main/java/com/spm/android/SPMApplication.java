@@ -12,6 +12,8 @@ import com.spm.domain.User;
 import com.spm.repository.UserRepository;
 import com.spm.store.Db4oHelper;
 
+import io.realm.RealmConfiguration;
+
 /**
  * 
  * @author Agustin Sgarlata

@@ -55,7 +55,8 @@ public class SplashActivity extends AbstractActivity {
 		// new DBProductRepository(this).loadInitialData();
 		// new DBVisitRepository(this).loadInitialData();
 		
-		ActivityLauncher.launchActivity(DashBoardActivity.class);
+		//ActivityLauncher.launchActivity(DashBoardActivity.class);
+		DashBoardActivity_.intent(this).start();
 		finish();
 	}
 }

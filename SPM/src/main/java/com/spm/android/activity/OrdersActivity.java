@@ -1,5 +1,8 @@
 package com.spm.android.activity;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.google.common.collect.Lists;
 import com.spm.R;
 import com.spm.android.common.ActivityLauncher;
 import com.spm.android.common.AndroidApplication;
@@ -22,6 +26,8 @@ import com.spm.common.domain.Application;
 import com.spm.domain.Client;
 import com.spm.domain.Order;
 import com.spm.domain.User;
+
+import java.util.List;
 
 /**
  * 
@@ -41,15 +47,26 @@ public class OrdersActivity extends AbstractListActivity<Order> {
 	private ActionBar actionBar;
 
 	@InjectExtra(value = CLIENT)
-	private Client client;
+	private Long clientId;
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onCreate(android.os.Bundle)
-	 */
+	private Client client;
+	Realm realm;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.orders_activity);
+
+		// Initialize Realm
+		Realm.init(this);
+		// Get a Realm instance for this thread
+		realm = Realm.getDefaultInstance();
+		// Build the query looking at all users:
+		RealmQuery<Client> query = realm.where(Client.class);
+		// Add query conditions:
+		query.equalTo("id", clientId);
+		// Execute the query:
+		client = query.findFirst();
 
 		actionBar.setTitle(client.getFirstName());
 
@@ -59,8 +76,7 @@ public class OrdersActivity extends AbstractListActivity<Order> {
 					@Override
 					public void onClick(View v) {
 						Bundle bundle = new Bundle();
-						bundle.putSerializable(OrdersActivity.CLIENT,
-								ordersUseCase.getClient());
+						bundle.putSerializable(OrdersActivity.CLIENT, clientId);
 						ActivityLauncher.launchActivity(
 								DetailOrderActivity.class, bundle);
 					}
@@ -118,7 +134,7 @@ public class OrdersActivity extends AbstractListActivity<Order> {
 
 			ordersUseCase.addListener(this);
 			if (ordersUseCase != null) {
-				ordersUseCase.setClient(client);
+				ordersUseCase.setClient(clientId);
 				executeUseCase(ordersUseCase);
 			} else if (ordersUseCase.isInProgress()) {
 				onStartUseCase();
@@ -138,9 +154,6 @@ public class OrdersActivity extends AbstractListActivity<Order> {
 		return ordersUseCase;
 	}
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onListItemClick(java.lang.Object)
-	 */
 	@Override
 	protected void onListItemClick(Order order) {
 		super.onListItemClick(order);
@@ -171,15 +184,13 @@ public class OrdersActivity extends AbstractListActivity<Order> {
 		});
 	}
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onDestroy()
-	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		if (ordersUseCase != null) {
 			ordersUseCase.removeListener(this);
 		}
+		realm.close();
 	}
 
 	/**

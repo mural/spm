@@ -1,10 +1,16 @@
 package com.spm.android.activity;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +44,7 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 	private Double dto;
 
 	@InjectExtra(value = CLIENT)
+	private Long clientId;
 	private Client client;
 
 	private ProductsUseCase productsUseCase;
@@ -55,13 +62,23 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 	public final static int REQUEST_CODE = IdGenerator.getIntId();
 	public final static String PRODUCT = "PRODUCT";
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onCreate(android.os.Bundle)
-	 */
+	Realm realm;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.products_activity);
+
+		// Initialize Realm
+		Realm.init(this);
+		// Get a Realm instance for this thread
+		realm = Realm.getDefaultInstance();
+		// Build the query looking at all users:
+		RealmQuery<Client> query = realm.where(Client.class);
+		// Add query conditions:
+		query.equalTo("id", clientId);
+		// Execute the query:
+		client = query.findFirst();
 
 		actionBar.setTitle(LocalizationUtils.getString(R.string.dtoClient,
 				dto.toString()));
@@ -117,18 +134,6 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 		}
 	}
 
-	// /**
-	// * @see
-	// roboguice.activity.RoboListActivity#onRetainNonConfigurationInstance()
-	// */
-	// @Override
-	// public Object onRetainNonConfigurationInstance() {
-	// return productsUseCase;
-	// }
-
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onListItemClick(java.lang.Object)
-	 */
 	@Override
 	protected void onListItemClick(Product product) {
 		super.onListItemClick(product);
@@ -145,29 +150,58 @@ public class ProductsActivity extends AbstractListActivity<Product> {
 	 */
 	@Override
 	public void onFinishUseCase() {
-		List<Product> products = productsUseCase.getProducts();
-		for (Product product : products) {
-			product.setQuantity(0);
-		}
+		//List<Product> products = productsUseCase.getProducts();
 
-		productsAdapter = new ProductsAdapter(this, products,
-				productsUseCase.getSelectedItems(), dto, client, totales);
 		executeOnUIThread(new Runnable() {
 
 			@Override
 			public void run() {
+				// Initialize Realm
+				Realm.init(getActivity());
+				// Get a Realm instance for this thread
+				realm = Realm.getDefaultInstance();
+				// Build the query looking at all users:
+				RealmQuery<Product> query = realm.where(Product.class);
+				// Execute the query:
+				RealmResults<Product> result1 = query.findAll();
+				List<Product> productList = Lists.newArrayList(result1.subList(0, result1.size()));
+				Collections.sort(productList);
+
+				List<Product> newProducts = Lists.newArrayList();
+				for (Product productToAdd : productList) {
+					boolean exists = false;
+					for (Product existentProduct : newProducts) {
+						if (productToAdd.getId().equals(existentProduct.getId())) {
+							exists = true;
+							break;
+						}
+					}
+					if (!exists) {
+						newProducts.add(realm.copyFromRealm(productToAdd));
+					}
+				}
+
+				for (Product product : newProducts) {
+					product.setQuantity(0);
+				}
+
+				productsAdapter = new ProductsAdapter(getActivity(), newProducts,
+						productsUseCase.getSelectedItems(), dto, client, totales);
+
 				setListAdapter(productsAdapter);
 				dismissLoading();
 			}
 		});
 	}
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onDestroy()
-	 */
+	public Activity getActivity() {
+		return this;
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		productsUseCase.removeListener(this);
+		realm.close();
 	}
 }

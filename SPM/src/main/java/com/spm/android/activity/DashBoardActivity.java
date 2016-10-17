@@ -28,11 +28,7 @@ import com.spm.domain.Client;
 import com.spm.domain.Product;
 import com.spm.domain.User;
 import com.spm.domain.Work;
-import com.spm.repository.ClientRepository;
-import com.spm.repository.DBClientRepository;
-import com.spm.repository.DBProductRepository;
 import com.spm.repository.DBUserRepository;
-import com.spm.repository.ProductRepository;
 import com.spm.repository.UserRepository;
 import com.spm.service.APIServiceImpl;
 
@@ -43,6 +39,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import hugo.weaving.DebugLog;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import roboguice.inject.InjectView;
 
 /**
@@ -54,8 +54,6 @@ public class DashBoardActivity extends AbstractActivity {
     private UpdateDataUseCase updateDataUseCase;
     private SyncUseCase syncUseCase;
 
-    ProductRepository productRepository;
-    ClientRepository clientRepository;
     UserRepository userRepository;
 
     @Nullable
@@ -86,6 +84,8 @@ public class DashBoardActivity extends AbstractActivity {
     boolean justCreated;
     boolean actualizandoData = false;
 
+    private Realm realm;
+
     /**
      * @see com.spm.android.common.activity.AbstractActivity#onCreate(android.os.Bundle)
      */
@@ -95,8 +95,6 @@ public class DashBoardActivity extends AbstractActivity {
 
         setContentView(R.layout.dashboard_activity);
 
-        productRepository = new DBProductRepository(this);
-        clientRepository = new DBClientRepository(this);
         userRepository = new DBUserRepository(this);
 
         clientes.setOnClickListener(new LaunchOnClickListener(
@@ -128,7 +126,7 @@ public class DashBoardActivity extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                // testApi();
+                testApi();
             }
         });
         justCreated = true;
@@ -156,10 +154,12 @@ public class DashBoardActivity extends AbstractActivity {
                     Date dateOfPriceList = apiService.getPriceListDate();
 
                     List<Client> clients = apiService.getClients(user);
-                    clientRepository.addAll(clients);
+                    //clientRepository.addAll(clients);
 
                     List<Product> products = apiService.getProducts();
-                    productRepository.addAll(products); // muyy lento! 45s.
+                    //productRepository.addAll(products); // muyy lento! 45s.
+
+                    saveClientsAndProducts(clients, products);
 
                     user.setUpdateDate(dateOfPriceList);
                     // Can be changed to // priceListDate, // and use updateDate for
@@ -173,6 +173,7 @@ public class DashBoardActivity extends AbstractActivity {
                             dismissLoading();
                         }
                     });
+                    actualizandoData = false;
                 }
             });
 
@@ -181,12 +182,45 @@ public class DashBoardActivity extends AbstractActivity {
         }
     }
 
+    @DebugLog
+    private void saveClientsAndProducts(List<Client> clients, List<Product> products) {
+        // Initialize Realm
+        Realm.init(this);
+        // Get a Realm instance for this thread
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(config);
+        // Persist your data in a transaction
+        realm.beginTransaction();
+
+        realm.copyToRealmOrUpdate(clients);
+        realm.copyToRealmOrUpdate(products);
+
+        realm.commitTransaction();
+        realm.close();
+
+        //todo!!!
+//        Product entity2 = get(entity.getId());
+//        if (entity2 != null) {
+//            entity2.modify(entity.getName(), entity.getPriceList(), entity.getPrice1(), entity.getPrice1ant(),
+//                    entity.getPrice2(), entity.getPrice2ant(), entity.getPrice3(), entity.getPrice3ant(),
+//                    entity.getPrice4(), entity.getPrice4ant(), entity.getPrice5(), entity.getPrice5ant());
+//            entity = entity2;
+//        }
+    }
+
     private void testApi() {
-        User user = Application.APPLICATION_PROVIDER.get().getUser();
-        // TelephonyManager tMgr =
-        // (TelephonyManager)AndroidApplication.get().getSystemService(Context.TELEPHONY_SERVICE);
-        // String result = tMgr.getLine1Number();
-        ToastUtils.showToast(user.getId().toString());
+        // Initialize Realm
+        Realm.init(this);
+        // Get a Realm instance for this thread
+        realm = Realm.getDefaultInstance();
+        // Build the query looking at all users:
+        RealmQuery<Client> query = realm.where(Client.class);
+        // Execute the query:
+        RealmResults<Client> result1 = query.findAll().sort("firstName");
+
+        ToastUtils.showToast(result1.last().getFirstName());
     }
 
     /**

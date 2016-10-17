@@ -1,6 +1,7 @@
 package com.spm.android.activity;
 
-import java.util.Collections;
+import android.content.Context;
+
 import java.util.List;
 import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
@@ -8,8 +9,9 @@ import com.spm.common.domain.Application;
 import com.spm.common.usecase.DefaultAbstractUseCase;
 import com.spm.domain.Client;
 import com.spm.domain.User;
-import com.spm.repository.ClientRepository;
 import com.spm.service.APIService;
+
+import io.realm.Realm;
 
 /**
  * Use case to handle the splatt screen.
@@ -19,18 +21,17 @@ import com.spm.service.APIService;
 public class ClientsUseCase extends DefaultAbstractUseCase {
 	
 	private List<Client> clients = Lists.newArrayList();
-	
-	private ClientRepository clientRepository;
-	
+
+
+	private Realm realm;
+	private Context context;
+
 	@Inject
-	public ClientsUseCase(APIService apiService, ClientRepository clientRepository) {
+	public ClientsUseCase(APIService apiService,   Context context) {
 		super(apiService);
-		this.clientRepository = clientRepository;
+		this.context = context;
 	}
-	
-	/**
-	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
-	 */
+
 	@Override
 	protected void doExecute() {
 		
@@ -42,8 +43,8 @@ public class ClientsUseCase extends DefaultAbstractUseCase {
 		// clients.add(client);
 		// }
 		// }
-		clients.addAll(clientRepository.getByUserId(user.getId()));
-		Collections.sort(clients);
+		//clients.addAll(clientRepository.getByUserId(user.getId()));
+		//Collections.sort(clients);
 	}
 	
 	/**

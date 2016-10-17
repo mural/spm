@@ -1,5 +1,7 @@
 package com.spm.android.activity;
 
+import android.content.Context;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -14,10 +16,13 @@ import com.spm.domain.Order;
 import com.spm.domain.User;
 import com.spm.domain.Visit;
 import com.spm.domain.Work;
-import com.spm.repository.ClientRepository;
 import com.spm.repository.OrderRepository;
 import com.spm.repository.VisitRepository;
 import com.spm.service.APIService;
+
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 /**
  * Use case to handle the Sync screen.
@@ -32,20 +37,18 @@ public class SyncUseCase extends DefaultAbstractUseCase {
 
 	private OrderRepository orderRepository;
 	private VisitRepository visitRepository;
-	private ClientRepository clientRepository;
+
+	Context context;
 
 	@Inject
 	public SyncUseCase(APIService apiService, OrderRepository orderRepository,
-			ClientRepository clientRepository, VisitRepository visitRepository) {
+			  VisitRepository visitRepository, Context context) {
 		super(apiService);
 		this.orderRepository = orderRepository;
-		this.clientRepository = clientRepository;
 		this.visitRepository = visitRepository;
+		this.context = context;
 	}
 
-	/**
-	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
-	 */
 	@Override
 	protected void doExecute() {
 		works.clear();
@@ -67,11 +70,17 @@ public class SyncUseCase extends DefaultAbstractUseCase {
 	 * @return the client
 	 */
 	public Client getClient(Work work) {
-		if (work instanceof Order) {
-			return clientRepository.get(((Order) work).getClientId());
-		} else {
-			return clientRepository.get(((Visit) work).getClientId());
-		}
+			// Initialize Realm
+			Realm.init(context);
+			// Get a Realm instance for this thread
+			Realm realm = Realm.getDefaultInstance();
+			// Build the query looking at all users:
+			RealmQuery<Client> query = realm.where(Client.class);
+			query.equalTo("id", ((Order) work).getClientId());
+			// Execute the query:
+			Client client = query.findFirst();
+
+			return realm.copyFromRealm(client);
 	}
 
 	/**

@@ -9,7 +9,6 @@ import com.google.inject.internal.Lists;
 import com.google.inject.internal.Sets;
 import com.spm.common.usecase.DefaultAbstractUseCase;
 import com.spm.domain.Product;
-import com.spm.repository.ProductRepository;
 import com.spm.service.APIService;
 
 /**
@@ -24,36 +23,30 @@ public class ProductsUseCase extends DefaultAbstractUseCase {
 
 	private Set<Product> selectedItems = Sets.newHashSet();
 
-	private ProductRepository productRepository;
 
 	@Inject
-	public ProductsUseCase(APIService apiService,
-			ProductRepository productRepository) {
+	public ProductsUseCase(APIService apiService){
 		super(apiService);
-		this.productRepository = productRepository;
 	}
 
-	/**
-	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
-	 */
 	@Override
 	protected void doExecute() {
 		// This logic in DETAIL ORDER ACTIVITY!!! (and use the common one for
 		// this...)
 		// List<Product> newProducts = productRepository.get(product);
-		List<Product> newProducts = productRepository.getAll();
-		for (Product productToAdd : newProducts) {
-			boolean exists = false;
-			for (Product existentProduct : products) {
-				if (productToAdd.getId().equals(existentProduct.getId())) {
-					exists = true;
-					break;
-				}
-			}
-			if (!exists) {
-				products.add(productToAdd);
-			}
-		}
+//		List<Product> newProducts = productRepository.getAll();
+//		for (Product productToAdd : newProducts) {
+//			boolean exists = false;
+//			for (Product existentProduct : products) {
+//				if (productToAdd.getId().equals(existentProduct.getId())) {
+//					exists = true;
+//					break;
+//				}
+//			}
+//			if (!exists) {
+//				products.add(productToAdd);
+//			}
+//		}
 	}
 
 	/**

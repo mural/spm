@@ -48,9 +48,7 @@ public class SyncActivity extends AbstractListActivity<Work> {
 	@InjectView(R.id.actionBar)
 	private ActionBar actionBar;
 
-	/**
-	 * @see com.splatt.android.common.activity.AbstractListActivity#onCreate(android.os.Bundle)
-	 */
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,7 +131,7 @@ public class SyncActivity extends AbstractListActivity<Work> {
 		if (work instanceof Order) {
 			bundle.putSerializable(DetailOrderActivity.ORDER, work);
 			bundle.putSerializable(OrdersActivity.CLIENT,
-					syncUseCase.getClient(work));
+					syncUseCase.getClient(work).getId());
 			ActivityLauncher.launchActivity(DetailOrderActivity.class, bundle);
 		}
 		if (work instanceof Visit) {
@@ -255,9 +253,6 @@ public class SyncActivity extends AbstractListActivity<Work> {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		Intent intent = new Intent(this, AndroidApplication.get()
-				.getHomeActivityClass());
-		intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-		startActivity(intent);
+		DashBoardActivity_.intent(this).start();
 	}
 }

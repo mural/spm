@@ -5,20 +5,17 @@ import java.util.List;
 import java.util.Map;
 import com.google.inject.internal.Lists;
 import com.google.inject.internal.Maps;
-import com.spm.common.domain.Entity;
+import com.spm.common.domain.EntityInterface;
 
 /**
  * 
  * @param <T>
  * @author Maxi Rosson
  */
-public class InMemoryRepository<T extends Entity> extends AbstractRepository<T> {
+public class InMemoryRepository<T extends EntityInterface> extends AbstractRepository<T> {
 	
 	private Map<Long, T> items = Maps.newHashMap();
-	
-	/**
-	 * @see com.spm.common.repository.Repository#add(com.splatt.common.domain.Entity)
-	 */
+
 	@Override
 	public void add(T entity) {
 		super.add(entity);
@@ -35,10 +32,7 @@ public class InMemoryRepository<T extends Entity> extends AbstractRepository<T> 
 			add(entity);
 		}
 	}
-	
-	/**
-	 * @see com.spm.common.repository.Repository#remove(com.splatt.common.domain.Entity)
-	 */
+
 	@Override
 	public void remove(T entity) {
 		super.remove(entity);
@@ -77,10 +71,7 @@ public class InMemoryRepository<T extends Entity> extends AbstractRepository<T> 
 		super.remove(id);
 		items.remove(id);
 	}
-	
-	/**
-	 * @see com.spm.common.repository.Repository#get(com.spm.common.domain.Entity)
-	 */
+
 	@Override
 	public List<T> get(T entity) {
 		// TODO Auto-generated method stub
