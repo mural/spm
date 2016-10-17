@@ -178,9 +178,14 @@ public class LoginActivity extends AbstractActivity {
 						username.getText().toString());
 				dismissLoading();
 				finish();
-				ActivityLauncher.launchActivity(DashBoardActivity.class);
+				//ActivityLauncher.launchActivity(DashBoardActivity.class);
+				startDashboard();
 			}
 		});
+	}
+
+	private void startDashboard() {
+		DashBoardActivity_.intent(this).start();
 	}
 
 	private void update() {

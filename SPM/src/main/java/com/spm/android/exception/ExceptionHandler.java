@@ -85,7 +85,7 @@ public class ExceptionHandler extends Handler implements UncaughtExceptionHandle
 		try {
 			String user = "";
 			if (Application.APPLICATION_PROVIDER.get().getUser() != null) {
-				user = Application.APPLICATION_PROVIDER.get().getUser().getUserName();
+				user = Application.APPLICATION_PROVIDER.get().getUser().getFirstName();
 			}
 			if (ApplicationProvider.MAIL_REPORTING) {
 				reporter.reportException(thread, throwable, user);

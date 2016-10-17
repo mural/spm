@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#EEEEEE"
+    android:textColor="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/actionBarLogo"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/logo_spm2" />
+
+    <TextView
+        android:id="@+id/actionBarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/actionBarLogo"
+        android:padding="3dp"
+        android:text="@string/appName"
+        android:textColor="@color/textColor"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:id="@+id/actionsViewgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical">
+
+        <ProgressBar
+            android:id="@+id/actionBarLoading"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</RelativeLayout>

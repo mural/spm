@@ -1,7 +1,6 @@
 package com.spm.common.http;
 
 import java.io.InputStream;
-import org.apache.http.HttpEntity;
 import android.util.Log;
 import com.spm.common.http.webservice.PostWebService;
 import com.spm.common.http.webservice.WebService;
@@ -67,14 +66,6 @@ public class MockWebService implements PostWebService {
 	 */
 	@Override
 	public void addParameter(String name, Object value) {
-		// Do Nothing
-	}
-	
-	/**
-	 * @see com.spm.common.http.webservice.PostWebService#setBody(org.apache.http.HttpEntity)
-	 */
-	@Override
-	public void setBody(HttpEntity entity) {
 		// Do Nothing
 	}
 	

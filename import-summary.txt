@@ -1,0 +1,345 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From SPM:
+* default.properties
+* pom.xml
+* proguard.cfg
+* src\
+* src\.svn\
+* src\.svn\all-wcprops
+* src\.svn\dir-prop-base
+* src\.svn\entries
+* src\main\
+* src\main\.svn\
+* src\main\.svn\all-wcprops
+* src\main\.svn\dir-prop-base
+* src\main\.svn\entries
+* target\
+* target\.svn\
+* target\.svn\all-wcprops
+* target\.svn\dir-prop-base
+* target\.svn\dir-props
+* target\.svn\entries
+* target\generated-sources\
+* target\generated-sources\combined-resources\
+* target\generated-sources\combined-resources\res\
+* target\generated-sources\combined-resources\res\.svn\
+* target\generated-sources\combined-resources\res\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\.svn\entries
+* target\generated-sources\combined-resources\res\color\
+* target\generated-sources\combined-resources\res\color\.svn\
+* target\generated-sources\combined-resources\res\color\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\color\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\color\.svn\entries
+* target\generated-sources\combined-resources\res\color\.svn\text-base\
+* target\generated-sources\combined-resources\res\color\.svn\text-base\tab_text_color_selector.xml.svn-base
+* target\generated-sources\combined-resources\res\color\tab_text_color_selector.xml
+* target\generated-sources\combined-resources\res\drawable-hdpi\
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\entries
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\badge.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\facebook_icon.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\ic_action_done.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\ic_facebook_launcher.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\ic_menu_close_clear_cancel.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\icon.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\next_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\prev_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\toast_error.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\toast_frame.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\toast_info.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\prop-base\toast_warning.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\badge.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\facebook_icon.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\ic_action_done.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\ic_facebook_launcher.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\ic_menu_close_clear_cancel.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\icon.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\next_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\prev_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\toast_error.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\toast_frame.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\toast_info.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\.svn\text-base\toast_warning.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-hdpi\badge.9.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\facebook_icon.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\ic_action_done.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\ic_facebook_launcher.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\ic_menu_close_clear_cancel.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\icon.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\next_green_arrow.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\prev_green_arrow.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\toast_error.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\toast_frame.9.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\toast_info.png
+* target\generated-sources\combined-resources\res\drawable-hdpi\toast_warning.png
+* target\generated-sources\combined-resources\res\drawable-mdpi\
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\entries
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\add.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\ic_menu_close_clear_cancel.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\ic_menu_save.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\toast_error.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\toast_frame.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\toast_info.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\prop-base\toast_warning.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\add.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\ic_menu_close_clear_cancel.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\ic_menu_save.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\toast_error.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\toast_frame.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\toast_info.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\.svn\text-base\toast_warning.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-mdpi\add.png
+* target\generated-sources\combined-resources\res\drawable-mdpi\ic_menu_close_clear_cancel.png
+* target\generated-sources\combined-resources\res\drawable-mdpi\ic_menu_save.png
+* target\generated-sources\combined-resources\res\drawable-mdpi\toast_error.png
+* target\generated-sources\combined-resources\res\drawable-mdpi\toast_frame.9.png
+* target\generated-sources\combined-resources\res\drawable-mdpi\toast_info.png
+* target\generated-sources\combined-resources\res\drawable-mdpi\toast_warning.png
+* target\generated-sources\combined-resources\res\drawable-xhdpi\
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\entries
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\prop-base\
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\prop-base\toast_frame.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\text-base\
+* target\generated-sources\combined-resources\res\drawable-xhdpi\.svn\text-base\toast_frame.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable-xhdpi\toast_frame.9.png
+* target\generated-sources\combined-resources\res\drawable\
+* target\generated-sources\combined-resources\res\drawable\.svn\
+* target\generated-sources\combined-resources\res\drawable\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\drawable\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\drawable\.svn\entries
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\arrow_right.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\badge.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\balloon_overlay_focused.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\balloon_overlay_unfocused.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\button_blue.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\button_blue_highlighted.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\button_blue_pressed.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\icon.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\logo.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\map_marker.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\next_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\prop-base\prev_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\action_bar_text_button_selector.xml.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\arrow_right.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\badge.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\balloon_overlay_bg_selector.xml.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\balloon_overlay_focused.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\balloon_overlay_unfocused.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\border.xml.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\button_blue.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\button_blue_highlighted.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\button_blue_pressed.9.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\icon.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\logo.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\map_marker.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\next_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\prev_green_arrow.png.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\row.xml.svn-base
+* target\generated-sources\combined-resources\res\drawable\.svn\text-base\tab_background_selector.xml.svn-base
+* target\generated-sources\combined-resources\res\drawable\action_bar_text_button_selector.xml
+* target\generated-sources\combined-resources\res\drawable\arrow_right.png
+* target\generated-sources\combined-resources\res\drawable\badge.9.png
+* target\generated-sources\combined-resources\res\drawable\balloon_overlay_bg_selector.xml
+* target\generated-sources\combined-resources\res\drawable\balloon_overlay_focused.9.png
+* target\generated-sources\combined-resources\res\drawable\balloon_overlay_unfocused.9.png
+* target\generated-sources\combined-resources\res\drawable\border.xml
+* target\generated-sources\combined-resources\res\drawable\button_blue.9.png
+* target\generated-sources\combined-resources\res\drawable\button_blue_highlighted.9.png
+* target\generated-sources\combined-resources\res\drawable\button_blue_pressed.9.png
+* target\generated-sources\combined-resources\res\drawable\icon.png
+* target\generated-sources\combined-resources\res\drawable\logo.png
+* target\generated-sources\combined-resources\res\drawable\map_marker.png
+* target\generated-sources\combined-resources\res\drawable\next_green_arrow.png
+* target\generated-sources\combined-resources\res\drawable\prev_green_arrow.png
+* target\generated-sources\combined-resources\res\drawable\row.xml
+* target\generated-sources\combined-resources\res\drawable\tab_background_selector.xml
+* target\generated-sources\combined-resources\res\layout\
+* target\generated-sources\combined-resources\res\layout\.svn\
+* target\generated-sources\combined-resources\res\layout\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\layout\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\layout\.svn\entries
+* target\generated-sources\combined-resources\res\layout\.svn\prop-base\
+* target\generated-sources\combined-resources\res\layout\.svn\prop-base\my_map_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\prop-base\sync_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\action_bar.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\action_bar_text_button.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\balloon_overlay.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\calendar.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\client_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\clients_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\dashboard_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\detail_order_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\exceptions_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\line_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\lines_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\loading_dialog.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\login_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\my_map_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\notification.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\notification_inprogress.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\num_dialog.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\order_item_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\order_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\orders_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\pagination_footer.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\picture_menu_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\product_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\products_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\share_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\splash_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\sync_activity.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\sync_row.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\.svn\text-base\toast_custom.xml.svn-base
+* target\generated-sources\combined-resources\res\layout\action_bar.xml
+* target\generated-sources\combined-resources\res\layout\action_bar_text_button.xml
+* target\generated-sources\combined-resources\res\layout\balloon_overlay.xml
+* target\generated-sources\combined-resources\res\layout\calendar.xml
+* target\generated-sources\combined-resources\res\layout\client_row.xml
+* target\generated-sources\combined-resources\res\layout\clients_activity.xml
+* target\generated-sources\combined-resources\res\layout\dashboard_activity.xml
+* target\generated-sources\combined-resources\res\layout\detail_order_activity.xml
+* target\generated-sources\combined-resources\res\layout\exceptions_activity.xml
+* target\generated-sources\combined-resources\res\layout\line_row.xml
+* target\generated-sources\combined-resources\res\layout\lines_activity.xml
+* target\generated-sources\combined-resources\res\layout\loading_dialog.xml
+* target\generated-sources\combined-resources\res\layout\login_activity.xml
+* target\generated-sources\combined-resources\res\layout\my_map_activity.xml
+* target\generated-sources\combined-resources\res\layout\notification.xml
+* target\generated-sources\combined-resources\res\layout\notification_inprogress.xml
+* target\generated-sources\combined-resources\res\layout\num_dialog.xml
+* target\generated-sources\combined-resources\res\layout\order_item_row.xml
+* target\generated-sources\combined-resources\res\layout\order_row.xml
+* target\generated-sources\combined-resources\res\layout\orders_activity.xml
+* target\generated-sources\combined-resources\res\layout\pagination_footer.xml
+* target\generated-sources\combined-resources\res\layout\picture_menu_activity.xml
+* target\generated-sources\combined-resources\res\layout\product_row.xml
+* target\generated-sources\combined-resources\res\layout\products_activity.xml
+* target\generated-sources\combined-resources\res\layout\share_row.xml
+* target\generated-sources\combined-resources\res\layout\splash_activity.xml
+* target\generated-sources\combined-resources\res\layout\sync_activity.xml
+* target\generated-sources\combined-resources\res\layout\sync_row.xml
+* target\generated-sources\combined-resources\res\layout\toast_custom.xml
+* target\generated-sources\combined-resources\res\menu\
+* target\generated-sources\combined-resources\res\menu\.svn\
+* target\generated-sources\combined-resources\res\menu\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\menu\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\menu\.svn\entries
+* target\generated-sources\combined-resources\res\menu\.svn\text-base\
+* target\generated-sources\combined-resources\res\menu\.svn\text-base\dev_menu.xml.svn-base
+* target\generated-sources\combined-resources\res\menu\.svn\text-base\menu.xml.svn-base
+* target\generated-sources\combined-resources\res\menu\dev_menu.xml
+* target\generated-sources\combined-resources\res\menu\menu.xml
+* target\generated-sources\combined-resources\res\values\
+* target\generated-sources\combined-resources\res\values\.svn\
+* target\generated-sources\combined-resources\res\values\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\values\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\values\.svn\entries
+* target\generated-sources\combined-resources\res\values\.svn\text-base\
+* target\generated-sources\combined-resources\res\values\.svn\text-base\attrs.xml.svn-base
+* target\generated-sources\combined-resources\res\values\.svn\text-base\colors.xml.svn-base
+* target\generated-sources\combined-resources\res\values\.svn\text-base\dimensions.xml.svn-base
+* target\generated-sources\combined-resources\res\values\.svn\text-base\strings.xml.svn-base
+* target\generated-sources\combined-resources\res\values\.svn\text-base\styles.xml.svn-base
+* target\generated-sources\combined-resources\res\values\.svn\text-base\styles_common.xml.svn-base
+* target\generated-sources\combined-resources\res\values\attrs.xml
+* target\generated-sources\combined-resources\res\values\colors.xml
+* target\generated-sources\combined-resources\res\values\dimensions.xml
+* target\generated-sources\combined-resources\res\values\strings.xml
+* target\generated-sources\combined-resources\res\values\styles.xml
+* target\generated-sources\combined-resources\res\values\styles_common.xml
+* target\generated-sources\combined-resources\res\xml\
+* target\generated-sources\combined-resources\res\xml\.svn\
+* target\generated-sources\combined-resources\res\xml\.svn\all-wcprops
+* target\generated-sources\combined-resources\res\xml\.svn\dir-prop-base
+* target\generated-sources\combined-resources\res\xml\.svn\entries
+* target\generated-sources\combined-resources\res\xml\.svn\text-base\
+* target\generated-sources\combined-resources\res\xml\.svn\text-base\dev_preferences.xml.svn-base
+* target\generated-sources\combined-resources\res\xml\.svn\text-base\preferences.xml.svn-base
+* target\generated-sources\combined-resources\res\xml\dev_preferences.xml
+* target\generated-sources\combined-resources\res\xml\preferences.xml
+* target\generated-sources\r\
+* target\generated-sources\r\com\
+* target\generated-sources\r\com\spm\
+* target\generated-sources\r\com\spm\R.java
+From db4oj:
+* plugins\
+* plugins\src\
+* plugins\src\com\
+* plugins\src\com\db4o\
+* plugins\src\com\db4o\util\
+* plugins\src\com\db4o\util\io\
+* plugins\src\com\db4o\util\io\NIOFileAdapter.java
+* plugins\src\com\db4o\util\io\spikes\
+* plugins\src\com\db4o\util\io\spikes\SimpleIoBenchmark.java
+* plugins\src\com\db4o\util\io\spikes\TestDummy.java
+* plugins\src\com\db4o\util\io\win32\
+* plugins\src\com\db4o\util\io\win32\Win32IoAdapter.java
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In db4oj:
+* core\src\ => db4oj\src\main\java\
+* lib\decaf-annotations.jar => db4oj\lib\decaf-annotations.jar
+In SPM:
+* AndroidManifest.xml => sPM\src\main\AndroidManifest.xml
+* assets\ => sPM\src\main\assets
+* libs\activation-1.0.jar => sPM\libs\activation-1.0.jar
+* libs\additionnal-1.0.jar => sPM\libs\additionnal-1.0.jar
+* libs\apache-mime4j-0.6.jar => sPM\libs\apache-mime4j-0.6.jar
+* libs\guice-2.0-no_aop.jar => sPM\libs\guice-2.0-no_aop.jar
+* libs\httpmime-4.0.1.jar => sPM\libs\httpmime-4.0.1.jar
+* libs\jtds-1.2.4.jar => sPM\libs\jtds-1.2.4.jar
+* libs\mail-1.0.jar => sPM\libs\mail-1.0.jar
+* libs\roboguice-1.1.2.jar => sPM\libs\roboguice-1.1.2.jar
+* libs\roboguice-sherlock-1.5.jar => sPM\libs\roboguice-sherlock-1.5.jar
+* lint.xml => sPM\lint.xml
+* res\ => sPM\src\main\res\
+* src\main\java\ => sPM\src\main\java\
+* src\main\resources\ => sPM\src\main\java\
+* src\main\resources\mocks\xml\clients_data.xml => sPM\src\main\resources\mocks\xml\clients_data.xml
+* src\main\resources\mocks\xml\products_data.xml => sPM\src\main\resources\mocks\xml\products_data.xml
+* src\main\resources\mocks\xml\users_data.xml => sPM\src\main\resources\mocks\xml\users_data.xml
+* src\main\resources\settings.local.properties => sPM\src\main\resources\settings.local.properties
+* src\main\resources\settings.properties => sPM\src\main\resources\settings.properties
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

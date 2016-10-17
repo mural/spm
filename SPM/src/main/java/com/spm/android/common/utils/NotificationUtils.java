@@ -47,7 +47,7 @@ public class NotificationUtils {
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		
 		Context context = AndroidApplication.get();
-		notification.setLatestEventInfo(context, contentTitle, contentText, notification.contentIntent);
+		//todo notification.setLatestEventInfo(context, contentTitle, contentText, notification.contentIntent);
 		
 		sendNotification(id, notification);
 	}

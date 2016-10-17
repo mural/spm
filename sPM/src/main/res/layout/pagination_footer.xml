@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.teracode.android.activity.common.PaginationFooter
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="match_parent"
+	android:layout_height="wrap_content" android:padding="10dp"
+	android:gravity="center_horizontal" android:background="@android:color/white">
+	<ProgressBar android:id="@+id/progressBar" style="@style/SmallBlackProgressIndicator"
+		android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+	<TextView android:id="@+id/loading" android:text="@string/loading"
+		android:layout_width="wrap_content" android:layout_height="match_parent"
+		android:gravity="center_vertical" android:textSize="20dp"
+		android:layout_marginLeft="10dp" android:textColor="@android:color/black" />
+</com.teracode.android.activity.common.PaginationFooter>

@@ -20,7 +20,8 @@ public class WebServiceFactory {
 			return ApplicationProvider.getAbstractMockWebServiceInstance(module, action);
 		} else {
 			String baseURL = getBaseURL(serverUrl, module, action);
-			return HttpGetWebService.getNew(baseURL);
+			//todo return HttpGetWebService.getNew(baseURL);
+			return ApplicationProvider.getAbstractMockWebServiceInstance(module, action);
 		}
 	}
 	
@@ -33,7 +34,8 @@ public class WebServiceFactory {
 			return ApplicationProvider.getAbstractMockWebServiceInstance(module, action);
 		} else {
 			String baseURL = getBaseURL(serverUrl, module, action);
-			return HttpPostWebService.getNew(baseURL);
+			//todo return HttpPostWebService.getNew(baseURL);
+			return ApplicationProvider.getAbstractMockWebServiceInstance(module, action);
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package com.spm.parser.xml;
 
+import android.util.Log;
+
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -89,17 +91,15 @@ public class UsersParser extends XmlParser {
 			try {
 				user.setOrderNumber(api.lastOrderNumber(user));
 			} catch (SQLException e) {
-				throw new RuntimeException("Error con los datos del Server");
+				//throw new RuntimeException("Error con los datos del Server");
+				Log.e("USERS_PARSER", e.getMessage());
 			}
 			// TODO: esto deberia resolverlo la misma API en el server...
 			
 			users.add(user);
 		}
 	}
-	
-	/**
-	 * @see com.splatt.common.parser.xml.XmlParser#getResponse()
-	 */
+
 	@Override
 	protected Object getResponse() {
 		return users;

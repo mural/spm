@@ -63,7 +63,7 @@ public class DBUserRepository extends DbProvider<User> implements UserRepository
 			if (entityToAdd.getUsersUpdateDate() != null) {
 				entity.setUsersUpdateDate(entityToAdd.getUsersUpdateDate());
 			}
-			if (entity.getOrderNumber() < entityToAdd.getOrderNumber()) {
+			if (entity.getOrderNumber() == null || (entity.getOrderNumber() < entityToAdd.getOrderNumber())) {
 				entity.setOrderNumber(entityToAdd.getOrderNumber());
 			}
 		} catch (ObjectNotFoundException e) {

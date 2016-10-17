@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<color name="lightWhite">#C0C0C0</color>
-	<color name="transparentBlack">#AA000000</color>
-	<color name="listSeparatorCenter">#99000000</color>
-	<color name="listSeparatorBorder">#99CCCCCC</color>
-</resources>

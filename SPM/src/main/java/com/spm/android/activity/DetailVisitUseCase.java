@@ -55,18 +55,19 @@ public class DetailVisitUseCase extends DefaultAbstractUseCase {
 					Visit.OTROS, clientId, Boolean.FALSE, user.getId());
 			visit.modify(clientId.toString() + "." + secuencial.toString());
 			visitRepository.add(visit); // TODO manage ID!
-			
-			Log.d("GPS for SPM", "--- pre thread ! ---");
-			ThreadUtils.execute(new Runnable() {
-				
-				@Override
-				public void run() {
-					Log.d("GPS for SPM", "--- init de thread ! ---");
-					Intent service = new Intent(AndroidApplication.get(), MyLocationService.class);
-					service.putExtra("ID", visit.getId());
-					AndroidApplication.get().startService(service);
-				}
-			});
+
+			//todo
+//			Log.d("GPS for SPM", "--- pre thread ! ---");
+//			ThreadUtils.execute(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					Log.d("GPS for SPM", "--- init de thread ! ---");
+//					Intent service = new Intent(AndroidApplication.get(), MyLocationService.class);
+//					service.putExtra("ID", visit.getId());
+//					AndroidApplication.get().startService(service);
+//				}
+//			});
 			
 		} else {
 			visit = visitRepository.get(visit.getId());

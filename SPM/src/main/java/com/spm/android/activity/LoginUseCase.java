@@ -45,8 +45,8 @@ public class LoginUseCase extends DefaultAbstractUseCase {
 		// (phoneNumber != null)
 		// && phoneNumber.equals(user.getPhoneNumber()) &&
 		// user.checkValidDate()) {
-		if ((user != null) && (user.getFirstName().length() > 0)
-				&& user.checkValidDate()) { // for rapid access
+		if ((user != null) && (user.getFirstName().length() > 0) ){ //todo guardar en BD esto y recuperar tb: && user.isEnabled() ){
+				//&& user.checkValidDate()) { // for rapid access
 
 			user = new User(user.getId(), user.getFirstName(),
 					user.getClients(), user.getUpdateDate(),

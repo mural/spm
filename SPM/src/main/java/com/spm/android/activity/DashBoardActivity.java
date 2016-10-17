@@ -1,13 +1,9 @@
 package com.spm.android.activity;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import roboguice.inject.InjectView;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,290 +22,385 @@ import com.spm.android.common.utils.AlertDialogUtils;
 import com.spm.android.common.utils.LocalizationUtils;
 import com.spm.android.common.utils.ToastUtils;
 import com.spm.common.domain.Application;
+import com.spm.common.exception.AndroidException;
 import com.spm.common.utils.ThreadUtils;
+import com.spm.domain.Client;
+import com.spm.domain.Product;
 import com.spm.domain.User;
 import com.spm.domain.Work;
+import com.spm.repository.ClientRepository;
+import com.spm.repository.DBClientRepository;
+import com.spm.repository.DBProductRepository;
+import com.spm.repository.DBUserRepository;
+import com.spm.repository.ProductRepository;
+import com.spm.repository.UserRepository;
+import com.spm.service.APIServiceImpl;
+
+import org.androidannotations.annotations.EActivity;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import hugo.weaving.DebugLog;
+import roboguice.inject.InjectView;
 
 /**
- * 
  * @author Agustin Sgarlata
  */
+@EActivity
 public class DashBoardActivity extends AbstractActivity {
 
-	private UpdateDataUseCase updateDataUseCase;
-	private SyncUseCase syncUseCase;
+    private UpdateDataUseCase updateDataUseCase;
+    private SyncUseCase syncUseCase;
 
-	@Nullable
-	@InjectView(R.id.userName)
-	private TextView userName;
+    ProductRepository productRepository;
+    ClientRepository clientRepository;
+    UserRepository userRepository;
 
-	@Nullable
-	@InjectView(R.id.clientes)
-	private Button clientes;
+    @Nullable
+    @InjectView(R.id.userName)
+    private TextView userName;
 
-	@Nullable
-	@InjectView(R.id.sync)
-	private Button sync;
+    @Nullable
+    @InjectView(R.id.clientes)
+    private Button clientes;
 
-	@Nullable
-	@InjectView(R.id.update)
-	private Button update;
+    @Nullable
+    @InjectView(R.id.sync)
+    private Button sync;
 
-	@Nullable
-	@InjectView(R.id.dashPriceList)
-	private TextView dashPriceList;
+    @Nullable
+    @InjectView(R.id.update)
+    private Button update;
 
-	@Nullable
-	@InjectView(R.id.map)
-	private Button map;
+    @Nullable
+    @InjectView(R.id.dashPriceList)
+    private TextView dashPriceList;
 
-	boolean updated = false;
-	boolean justCreated;
+    @Nullable
+    @InjectView(R.id.map)
+    private Button map;
 
-	/**
-	 * @see com.spm.android.common.activity.AbstractActivity#onCreate(android.os.Bundle)
-	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    boolean updated = false;
+    boolean justCreated;
+    boolean actualizandoData = false;
 
-		setContentView(R.layout.dashboard_activity);
+    /**
+     * @see com.spm.android.common.activity.AbstractActivity#onCreate(android.os.Bundle)
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		clientes.setOnClickListener(new LaunchOnClickListener(
-				ClientsActivity.class));
-		sync.setOnClickListener(new LaunchOnClickListener(SyncActivity.class));
+        setContentView(R.layout.dashboard_activity);
 
-		updateDataUseCase = (UpdateDataUseCase) getLastNonConfigurationInstance();
-		if (updateDataUseCase == null) {
-			updateDataUseCase = getInstance(UpdateDataUseCase.class);
-		}
+        productRepository = new DBProductRepository(this);
+        clientRepository = new DBClientRepository(this);
+        userRepository = new DBUserRepository(this);
 
-		updateDataUseCase.addListener(this);
-		update.setOnClickListener(new AsyncOnClickListener() {
+        clientes.setOnClickListener(new LaunchOnClickListener(
+                ClientsActivity.class));
+        sync.setOnClickListener(new LaunchOnClickListener(SyncActivity.class));
 
-			@Override
-			public void onAsyncRun(View view) {
-				updateDataUseCase();
-			}
-		});
+        updateDataUseCase = (UpdateDataUseCase) getLastNonConfigurationInstance();
+        if (updateDataUseCase == null) {
+            updateDataUseCase = getInstance(UpdateDataUseCase.class);
+        }
+        updateDataUseCase.addListener(this);
+        if (updateDataUseCase.isInProgress()) {
+            onStartUseCase();
+        } else if (updateDataUseCase.isFinishSuccessful()) {
+            onFinishUseCase();
+        } else if (updateDataUseCase.isFinishFailed()) {
+            onFinishUseCase();
+        }
 
-		userName.setOnClickListener(new OnClickListener() {
+        update.setOnClickListener(new AsyncOnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// testApi();
-			}
-		});
-		justCreated = true;
-	}
+            @Override
+            public void onAsyncRun(View view) {
+                updateDataUseCase();
+            }
+        });
 
-	private void updateDataUseCase() {
-		if ((updateDataUseCase != null) && !updateDataUseCase.isInProgress()) {
-			// onStartUseCase();
-			runOnUiThread(new Runnable() {
+        userName.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void run() {
-					dashPriceList.setText("Actualizando...");
-				}
-			});
+            @Override
+            public void onClick(View v) {
+                // testApi();
+            }
+        });
+        justCreated = true;
+    }
 
-			ToastUtils.showToastOnUIThread("Actualizando...");
-			executeUseCase(updateDataUseCase);
-		} else if (updateDataUseCase.isInProgress()) {
-			ToastUtils.showToastOnUIThread("Actualizando, espere por favor.");
-		}
-	}
+    @DebugLog
+    private void updateDataUseCase() {
+        if (!actualizandoData) {
+            actualizandoData = true;
+            ToastUtils.showToastOnUIThread("Actualizando...");
+            runOnUiThread(new Runnable() {
 
-	private void testApi() {
-		User user = Application.APPLICATION_PROVIDER.get().getUser();
-		// TelephonyManager tMgr =
-		// (TelephonyManager)AndroidApplication.get().getSystemService(Context.TELEPHONY_SERVICE);
-		// String result = tMgr.getLine1Number();
-		ToastUtils.showToast(user.getId().toString());
-	}
+                @Override
+                public void run() {
+                    dashPriceList.setText("Actualizando...");
+                    showLoading();
+                }
+            });
 
-	/**
-	 * @see roboguice.activity.RoboActivity#onRetainNonConfigurationInstance()
-	 */
-	@Override
-	public Object onRetainNonConfigurationInstance() {
-		return updateDataUseCase;
-	}
+            ThreadUtils.execute(new Runnable() {
+                @Override
+                public void run() {
+                    APIServiceImpl apiService = new APIServiceImpl();
+                    User user = Application.APPLICATION_PROVIDER.get().getUser();
+                    Date dateOfPriceList = apiService.getPriceListDate();
 
-	/**
-	 * @see com.spm.android.common.activity.AbstractActivity#onFinishUseCase()
-	 */
-	@Override
-	public void onFinishUseCase() {
-		try {
-			runOnUiThread(new Runnable() {
+                    List<Client> clients = apiService.getClients(user);
+                    clientRepository.addAll(clients);
 
-				@Override
-				public void run() {
-					updateDate();
-					updated = true;
-					// datos actualizados a la ultima version de la base
-					clientes.setBackgroundResource(R.drawable.button_flat_inverted);
-					update.setBackgroundResource(R.drawable.button_flat_inverted);
+                    List<Product> products = apiService.getProducts();
+                    productRepository.addAll(products); // muyy lento! 45s.
 
-					// dismissLoading();
-					ToastUtils.showToastOnUIThread("Datos actualizados");
-				}
-			});
-		} catch (Exception e) {
-		}
-	}
+                    user.setUpdateDate(dateOfPriceList);
+                    // Can be changed to // priceListDate, // and use updateDate for
+                    // other purpose
+                    userRepository.add(user);
 
-	/**
-	 * @see android.app.Activity#onBackPressed()
-	 */
-	@Override
-	public void onBackPressed() {
-		AlertDialogUtils.showExitOkCancelDialog();
-	}
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateDate();
+                            dismissLoading();
+                        }
+                    });
+                }
+            });
 
-	/**
-	 * @see com.spm.android.common.activity.AbstractActivity#onResume()
-	 */
-	@Override
-	protected void onResume() {
-		super.onResume();
+        } else {
+            ToastUtils.showToastOnUIThread("Actualizando, espere por favor.");
+        }
+    }
 
-		User user = AndroidApplication.get().getUser();
-		if (user == null) {
-			ActivityLauncher.launchActivity(LoginActivity.class);
-			finish();
+    private void testApi() {
+        User user = Application.APPLICATION_PROVIDER.get().getUser();
+        // TelephonyManager tMgr =
+        // (TelephonyManager)AndroidApplication.get().getSystemService(Context.TELEPHONY_SERVICE);
+        // String result = tMgr.getLine1Number();
+        ToastUtils.showToast(user.getId().toString());
+    }
 
-		} else if (!Application.APPLICATION_PROVIDER.get().getUser()
-				.checkValidDate()) {
-			user.setUpdateDate(new Date());
-			Application.APPLICATION_PROVIDER.get().attach(user);
-			// AndroidApplication.get().logout(); //TODO waht ? ?¡
-		} else {
-			userName.setText("Bienvenido/a: " + user.getFirstName());
-		}
+    /**
+     * @see roboguice.activity.RoboActivity#onRetainNonConfigurationInstance()
+     */
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        return updateDataUseCase;
+    }
 
-		updateDate();
+    /**
+     * @see com.spm.android.common.activity.AbstractActivity#onFinishUseCase()
+     */
+    @Override
+    public void onFinishUseCase() {
+        Log.e("DASH", "onFinishUseCase");
+        try {
+            runOnUiThread(new Runnable() {
 
-		checkSync();
+                @Override
+                public void run() {
+                    updateDate();
+                    updated = true;
+                    // datos actualizados a la ultima version de la base
+                    clientes.setBackgroundResource(R.drawable.button_flat_inverted);
+                    update.setBackgroundResource(R.drawable.button_flat_inverted);
 
-		checkUpdatedData();
+                    // dismissLoading();
+                    ToastUtils.showToastOnUIThread("Datos actualizados");
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		if (justCreated) {
-			// update.performClick(); // only first time...
-			justCreated = false;
-		}
-	}
+    @Override
+    public void onFinishFailedUseCase(AndroidException androidException) {
+        Log.e("DASH", "onFinishUseCaseERROR");
+        try {
+            runOnUiThread(new Runnable() {
 
-	private void updateDate() {
-		try {
-			User user = AndroidApplication.get().getUser();
-			if (user != null) {
-				if (dashPriceList == null) {
-					dashPriceList = (TextView) findViewById(R.id.dashPriceList);
-				}
-				if (user.getUpdateDate() == null) {
-					dashPriceList.setText(LocalizationUtils.getString(
-							R.string.priceDate, "no actualizado"));
-				} else {
-					dashPriceList.setText(LocalizationUtils.getString(
-							R.string.priceDate, user.getUpdateDate()
-									.toLocaleString()));
-				}
-			}
-		} catch (Exception e) {
-		}
+                @Override
+                public void run() {
+                    updateDate();
+                    updated = true;
+                    // datos actualizados a la ultima version de la base
+                    clientes.setBackgroundResource(R.drawable.button_flat_inverted);
+                    update.setBackgroundResource(R.drawable.button_flat_inverted);
 
-	}
+                    // dismissLoading();
+                    ToastUtils.showToastOnUIThread("Datos actualizados");
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	protected void checkSync() {
-		syncUseCase = getInstance(SyncUseCase.class);
-		syncUseCase.doExecute();
-		List<Work> works = syncUseCase.getWorks();
-		boolean synced = true;
-		for (Iterator<Work> iterator = works.iterator(); iterator.hasNext();) {
-			Work work = iterator.next();
-			if (work.getSync() == false) {
-				synced = false;
-			}
-		}
+    /**
+     * @see android.app.Activity#onBackPressed()
+     */
+    @Override
+    public void onBackPressed() {
+        AlertDialogUtils.showExitOkCancelDialog();
+    }
 
-		if (synced) {
-			sync.setBackgroundResource(R.drawable.button_flat_inverted);
-		} else {
-			sync.setBackgroundResource(R.drawable.button_cancel);
-		}
-	}
+    /**
+     * @see com.spm.android.common.activity.AbstractActivity#onResume()
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-	protected void checkUpdatedData() {
-		updateDataUseCase = getInstance(UpdateDataUseCase.class);
-		Runnable runnable = new Runnable() {
+        User user = AndroidApplication.get().getUser();
+        if (user == null) {
+            ActivityLauncher.launchActivity(LoginActivity.class);
+            finish();
 
-			@Override
-			public void run() {
-				updated = updateDataUseCase.isUpdatedData();
+        } else if (!Application.APPLICATION_PROVIDER.get().getUser()
+                .checkValidDate()) {
+            user.setUpdateDate(new Date());
+            Application.APPLICATION_PROVIDER.get().attach(user);
+            // AndroidApplication.get().logout(); //TODO waht ? ?¡
+        } else {
+            userName.setText("Bienvenido/a: " + user.getFirstName());
+        }
 
-				// Get a handler that can be used to post to the main thread
-				Handler mainHandler = new Handler(getApplicationContext()
-						.getMainLooper());
-				Runnable myRunnable = new Runnable() {
+        updateDate();
 
-					@Override
-					public void run() {
-						if (updated) {
-							// datos actualizados a la ultima version de la base
-							clientes.setBackgroundResource(R.drawable.button_flat_inverted);
-							update.setBackgroundResource(R.drawable.button_flat_inverted);
-						} else {
-							clientes.setBackgroundResource(R.drawable.button_cancel);
-							update.setBackgroundResource(R.drawable.button_cancel);
-						}
-					}
-				};
-				mainHandler.post(myRunnable);
-			}
-		};
-		ThreadUtils.execute(runnable);
+        checkSync();
 
-	}
+        checkUpdatedData();
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// menu.add(Menu.NONE, R.drawable.ic_sync, Menu.NONE, R.string.resync)
-		// .setIcon(R.drawable.ic_sync);
-		return super.onCreateOptionsMenu(menu);
-	}
+        if (justCreated) {
+            // update.performClick(); // only first time...
+            justCreated = false;
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.drawable.ic_sync:
-			update.performClick();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+    private void updateDate() {
+        try {
+            User user = AndroidApplication.get().getUser();
+            if (user != null) {
+                if (dashPriceList == null) {
+                    dashPriceList = (TextView) findViewById(R.id.dashPriceList);
+                }
+                if (user.getUpdateDate() == null) {
+                    dashPriceList.setText(LocalizationUtils.getString(
+                            R.string.priceDate, "no actualizado"));
+                } else {
+                    dashPriceList.setText(LocalizationUtils.getString(
+                            R.string.priceDate, user.getUpdateDate()
+                                    .toLocaleString()));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	private void update() {
-		final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+    }
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				executeUseCase(updateDataUseCase);
-			}
-		};
+    protected void checkSync() {
+        syncUseCase = getInstance(SyncUseCase.class);
+        syncUseCase.doExecute();
+        List<Work> works = syncUseCase.getWorks();
+        boolean synced = true;
+        for (Iterator<Work> iterator = works.iterator(); iterator.hasNext(); ) {
+            Work work = iterator.next();
+            if (work.getSync() == false) {
+                synced = false;
+            }
+        }
 
-		executeOnUIThread(new Runnable() {
+        if (synced) {
+            sync.setBackgroundResource(R.drawable.button_flat_inverted);
+        } else {
+            sync.setBackgroundResource(R.drawable.button_cancel);
+        }
+    }
 
-			@Override
-			public void run() {
-				AlertDialogUtils.showOkCancelDialog(dialogClickListener,
-						R.string.confirmUpdateTitle, R.string.confirmUpdateMsg,
-						R.string.update, R.string.notUpdate);
-			}
-		});
-	}
+    protected void checkUpdatedData() {
+        updateDataUseCase = getInstance(UpdateDataUseCase.class);
+        Runnable runnable = new Runnable() {
 
+            @Override
+            public void run() {
+                updated = updateDataUseCase.isUpdatedData();
+
+                // Get a handler that can be used to post to the main thread
+                Handler mainHandler = new Handler(getApplicationContext()
+                        .getMainLooper());
+                Runnable myRunnable = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (updated) {
+                            // datos actualizados a la ultima version de la base
+                            clientes.setBackgroundResource(R.drawable.button_flat_inverted);
+                            update.setBackgroundResource(R.drawable.button_flat_inverted);
+                        } else {
+                            clientes.setBackgroundResource(R.drawable.button_cancel);
+                            update.setBackgroundResource(R.drawable.button_cancel);
+                        }
+                    }
+                };
+                mainHandler.post(myRunnable);
+            }
+        };
+        ThreadUtils.execute(runnable);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // menu.add(Menu.NONE, R.drawable.ic_sync, Menu.NONE, R.string.resync)
+        // .setIcon(R.drawable.ic_sync);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.drawable.ic_sync:
+                update.performClick();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void update() {
+        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                executeUseCase(updateDataUseCase);
+            }
+        };
+
+        executeOnUIThread(new Runnable() {
+
+            @Override
+            public void run() {
+                AlertDialogUtils.showOkCancelDialog(dialogClickListener,
+                        R.string.confirmUpdateTitle, R.string.confirmUpdateMsg,
+                        R.string.update, R.string.notUpdate);
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        updateDataUseCase.removeListener(this);
+    }
 }

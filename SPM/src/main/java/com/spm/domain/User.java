@@ -25,6 +25,7 @@ public class User extends Entity implements Serializable {
 	private String phoneNumber;
 	private Long orderNumber;
 	private Date usersUpdateDate;
+	private boolean enabled;
 	
 	public User(Long id, String name) {
 		super(id);
@@ -148,6 +149,10 @@ public class User extends Entity implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	public void setUserName(String username) {
+		this.userName = username;
+	}
 	
 	/**
 	 * @return the orderNumber
@@ -168,7 +173,7 @@ public class User extends Entity implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return getFullname();
+		return getFirstName();
 	}
 	
 	/**
@@ -191,5 +196,13 @@ public class User extends Entity implements Serializable {
 		}
 		return usersUpdateDate.getDay() == (new Date()).getDay();
 		// return usersUpdateDate.getMinutes() == (new Date()).getMinutes();
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

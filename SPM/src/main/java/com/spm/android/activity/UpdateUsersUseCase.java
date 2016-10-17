@@ -21,6 +21,8 @@ import com.spm.repository.UserRepository;
 import com.spm.repository.VisitRepository;
 import com.spm.service.APIService;
 
+import hugo.weaving.DebugLog;
+
 /**
  * Use case to handle the {@link User}'s login.
  * 
@@ -48,13 +50,14 @@ public class UpdateUsersUseCase extends DefaultAbstractUseCase {
 		this.clientRepository = clientRepository;
 	}
 
-	/**
-	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
-	 */
+	@DebugLog
 	@Override
 	protected void doExecute() {
 		try {
 			List<User> users = getApiService().getContacts();
+			if (users.isEmpty()) {
+				throw new DatabaseFileLockedException("Error usuarios vacios...");
+			}
 			userRepository.addAll(users);
 
 			// Guardo fecha ultima actualizacion

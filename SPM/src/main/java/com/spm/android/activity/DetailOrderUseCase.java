@@ -59,18 +59,19 @@ public class DetailOrderUseCase extends DefaultAbstractUseCase {
 					Order.NORMAL, Order.TO_DELIVER, clientId, orderItems, Boolean.FALSE, user.getId());
 			order.modify(clientId.toString() + "." + secuencial.toString());
 			orderRepository.add(order); // TODO manage ID!
-			
-			Log.d("GPS for SPM", "--- pre thread ! ---");
-			ThreadUtils.execute(new Runnable() {
-				
-				@Override
-				public void run() {
-					Log.d("GPS for SPM", "--- init de thread ! ---");
-					Intent service = new Intent(AndroidApplication.get(), MyLocationService.class);
-					service.putExtra("ID", order.getId());
-					AndroidApplication.get().startService(service);
-				}
-			});
+
+			//todo!
+//			Log.d("GPS for SPM", "--- pre thread ! ---");
+//			ThreadUtils.execute(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					Log.d("GPS for SPM", "--- init de thread ! ---");
+//					Intent service = new Intent(AndroidApplication.get(), MyLocationService.class);
+//					service.putExtra("ID", order.getId());
+//					AndroidApplication.get().startService(service);
+//				}
+//			});
 			
 		} else {
 			order = orderRepository.get(order.getId());

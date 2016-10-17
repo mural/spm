@@ -16,6 +16,8 @@ import com.spm.repository.ProductRepository;
 import com.spm.repository.UserRepository;
 import com.spm.service.APIService;
 
+import hugo.weaving.DebugLog;
+
 /**
  * Use case to handle the {@link User}'s login.
  * 
@@ -38,55 +40,48 @@ public class UpdateDataUseCase extends DefaultAbstractUseCase {
 
 	}
 
-	/**
-	 * @see com.splatt.common.usecase.DefaultAbstractUseCase#doExecute()
-	 */
+	@DebugLog
 	@Override
 	protected void doExecute() {
 		User user = Application.APPLICATION_PROVIDER.get().getUser();
 		Date dateOfPriceList = getApiService().getPriceListDate();
-		if ((user != null) && (user.getUpdateDate() != null)
-				&& (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
-			throw CommonErrorCode.UPDATE_DATA_DATE_ERROR
-					.newLocalBusinessException();
-		} else if (((user != null) && (user.getUpdateDate() != null) && (dateOfPriceList
-				.compareTo(user.getUpdateDate()) < 0))
-				|| ((user != null) && (user.getUpdateDate() == null))) {
+//		if ((user != null) && (user.getUpdateDate() != null)
+//				&& (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
+//			// actualizada!
+//		} else if (((user != null) && (user.getUpdateDate() != null) && (dateOfPriceList
+//				.compareTo(user.getUpdateDate()) < 0))
+//				|| ((user != null) && (user.getUpdateDate() == null))) {
 
 			List<Client> clients = getApiService().getClients(user);
 			clientRepository.addAll(clients);
 
 			List<Product> products = getApiService().getProducts();
-			productRepository.addAll(products);
+			productRepository.addAll(products); // muyy lento! 45s.
 
 			user.setUpdateDate(dateOfPriceList);
 			// Can be changed to // priceListDate, // and use updateDate for
 			// other purpose
 			userRepository.add(user);
+//		}
 
-			// force activity finish use case
-			try {
-				DashBoardActivity currentActivity = (DashBoardActivity) AndroidApplication
-						.get().getCurrentActivity();
-				currentActivity.onFinishUseCase();
-			} catch (Exception e) {
-
-			}
-		}
 	}
 
 	public boolean isUpdatedData() {
 		User user = Application.APPLICATION_PROVIDER.get().getUser();
-		Date dateOfPriceList = getApiService().getPriceListDate();
-		if ((user != null) && (user.getUpdateDate() != null)
-				&& (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
+		try {
+			Date dateOfPriceList = getApiService().getPriceListDate();
+			if ((user != null) && (user.getUpdateDate() != null)
+					&& (dateOfPriceList.compareTo(user.getUpdateDate()) == 0)) {
+				return true;
+			} else if (((user != null) && (user.getUpdateDate() != null) && (dateOfPriceList
+					.compareTo(user.getUpdateDate()) < 0))
+					|| ((user != null) && (user.getUpdateDate() == null))) {
+				return false;
+			}
 			return true;
-		} else if (((user != null) && (user.getUpdateDate() != null) && (dateOfPriceList
-				.compareTo(user.getUpdateDate()) < 0))
-				|| ((user != null) && (user.getUpdateDate() == null))) {
+		} catch (Exception e) {
 			return false;
 		}
-		return true;
 	}
 
 }

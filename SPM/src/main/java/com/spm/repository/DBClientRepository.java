@@ -10,6 +10,8 @@ import com.spm.common.repository.ObjectNotFoundException;
 import com.spm.domain.Client;
 import com.spm.store.DbProvider;
 
+import hugo.weaving.DebugLog;
+
 /**
  * 
  * @author Agustin Sgarlata
@@ -66,6 +68,7 @@ public class DBClientRepository extends DbProvider<Client> implements ClientRepo
 	/**
 	 * @see com.spm.common.repository.Repository#addAll(java.util.Collection)
 	 */
+	@DebugLog
 	@Override
 	public void addAll(Collection<Client> entities) {
 		for (Client client : entities) {

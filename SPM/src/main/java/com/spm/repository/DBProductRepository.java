@@ -8,6 +8,8 @@ import com.spm.common.repository.ObjectNotFoundException;
 import com.spm.domain.Product;
 import com.spm.store.DbProvider;
 
+import hugo.weaving.DebugLog;
+
 /**
  * 
  * @author Agustin Sgarlata
@@ -53,6 +55,7 @@ public class DBProductRepository extends DbProvider<Product> implements ProductR
 	/**
 	 * @see com.spm.common.repository.Repository#addAll(java.util.Collection)
 	 */
+	@DebugLog
 	@Override
 	public void addAll(Collection<Product> entities) {
 		for (Product product : entities) {

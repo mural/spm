@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_root" android:orientation="vertical"
+	android:layout_width="match_parent" android:layout_height="wrap_content"
+	android:padding="10dp">
+
+	<TextView android:text="Cantidad" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:gravity="center_horizontal"
+		android:textSize="20dp" android:textColor="@android:color/white"/>
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:id="@+id/num" android:inputType="number">
+        <requestFocus></requestFocus>
+    </EditText>
+    <Button android:text="Aceptar" android:id="@+id/confirm" android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"></Button>
+    
+</LinearLayout>

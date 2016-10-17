@@ -42,7 +42,7 @@ public class ActionBar extends LinearLayout {
 		TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
 				R.styleable.actionBarStyleable);
 		String title = typedArray
-				.getString(R.styleable.actionBarStyleable_title1);
+				.getString(R.styleable.actionBarStyleable_title);
 		if (title != null) {
 			titleView.setText(title);
 		}
