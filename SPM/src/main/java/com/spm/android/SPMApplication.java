@@ -12,6 +12,7 @@ import com.spm.domain.User;
 import com.spm.repository.UserRepository;
 import com.spm.store.Db4oHelper;
 
+import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 /**
@@ -45,6 +46,12 @@ public class SPMApplication extends AndroidApplication {
 		// user = userRepository.getUser();
 
 		// dbHelper();
+
+		Realm.init(this);
+		RealmConfiguration config = new RealmConfiguration.Builder()
+				.deleteRealmIfMigrationNeeded()
+				.build();
+		Realm.setDefaultConfiguration(config);
 	}
 
 	/**

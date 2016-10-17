@@ -126,7 +126,7 @@ public class DashBoardActivity extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                testApi();
+               // testApi();
             }
         });
         justCreated = true;
@@ -187,10 +187,7 @@ public class DashBoardActivity extends AbstractActivity {
         // Initialize Realm
         Realm.init(this);
         // Get a Realm instance for this thread
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(config);
+        realm = Realm.getDefaultInstance();
         // Persist your data in a transaction
         realm.beginTransaction();
 
@@ -280,13 +277,13 @@ public class DashBoardActivity extends AbstractActivity {
         }
     }
 
-    /**
-     * @see android.app.Activity#onBackPressed()
-     */
-    @Override
-    public void onBackPressed() {
-        AlertDialogUtils.showExitOkCancelDialog();
-    }
+//    /**
+//     * @see android.app.Activity#onBackPressed()
+//     */
+//    @Override
+//    public void onBackPressed() {
+//        AlertDialogUtils.showExitOkCancelDialog();
+//    }
 
     /**
      * @see com.spm.android.common.activity.AbstractActivity#onResume()

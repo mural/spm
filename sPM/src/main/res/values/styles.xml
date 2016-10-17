@@ -4,6 +4,7 @@
     <style name="MyThemeWihoutTitle" parent="@style/defaultTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:textColorPrimary">@android:color/white</item>
+		<item name="android:alertDialogTheme">@style/CustomAlertDialogTheme</item>
     </style>
 
 	<style name="defaultTheme" parent="Theme.AppCompat.Light">
@@ -79,5 +80,15 @@
 	<style name="rowArrow" parent="rowContentRight">
 		<item name="android:background">@drawable/arrow_right</item>
  	</style>
+
+	<style name="CustomAlertDialogTheme">
+		<item name="android:windowBackground">@android:color/holo_orange_light</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+		<item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+		<item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+		<item name="android:textColor">@color/textColor</item>
+	</style>
 
 </resources>

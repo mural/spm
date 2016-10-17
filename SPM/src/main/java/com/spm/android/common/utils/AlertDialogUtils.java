@@ -103,7 +103,7 @@ public final class AlertDialogUtils {
 			DialogInterface.OnClickListener dialogClickListener2, int title, int message, int option1Button,
 			int option2Button) {
 		final Activity activity = AndroidApplication.get().getCurrentActivity();
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.CustomAlertDialogTheme);
 		builder.setTitle(title);
 		builder.setMessage(message);
 		builder.setPositiveButton(option1Button, dialogClickListener1);
