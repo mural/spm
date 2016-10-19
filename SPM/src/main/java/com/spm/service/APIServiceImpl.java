@@ -1,5 +1,6 @@
 package com.spm.service;
 
+import android.content.SyncStatusObserver;
 import android.util.Log;
 
 import com.spm.common.domain.Application;
@@ -43,31 +44,33 @@ public class APIServiceImpl implements APIService {
     @DebugLog
     @Override
     public List<User> getContacts() {
-//		WebService webservice = newGetService("contacts", "names", false);
-//		// webservice.addParameter(USERNAME, username);
-//
-//		return webservice.execute(new UsersParser());
         List<User> users = new ArrayList<>();
         try {
             Class.forName(driver).newInstance();
             con = DriverManager.getConnection(url + db, userDB, passDB);
             try {
                 Statement st = con.createStatement();
-                ResultSet res = st.executeQuery("SELECT TOP 1000 [ID] ,[DESCRIPCION] ,[FK_ITRIS_USERS] ,[HABILITADO] ,[CARGO], [_TELEFONO] FROM _INT_INF_VENDEDORES");
+                ResultSet res = st.executeQuery("SELECT TOP 1000 [_INT_INF_VENDEDORES].[ID] AS ID_USER ,[DESCRIPCION] ,[FK_ITRIS_USERS] ,[HABILITADO] ,[CARGO], [_TELEFONO], [NUMERO] " +
+                        "FROM _INT_INF_VENDEDORES " +
+                        "LEFT OUTER JOIN [_INT_CONT] ON [_INT_INF_VENDEDORES].[ID] = [_INT_CONT].[FK_ERP_ASESORES]");
                 while (res.next()) {
-                    User user = new User(Long.valueOf(res.getString("ID")), res.getString("FK_ITRIS_USERS"));
+                    User user = new User(Long.valueOf(res.getString("ID_USER")), res.getString("FK_ITRIS_USERS"));
                     user.setUserName(res.getString("DESCRIPCION"));
                     user.setPhoneNumber(res.getString("_TELEFONO"));
                     user.setUsersUpdateDate(new Date());
                     user.setEnabled(Long.valueOf(res.getString("HABILITADO")) == 1);
-                    try {
-                        user.setOrderNumber(lastOrderNumber(user));
+                    Long orderNumber;
+                    int numeroDeOrden = res.getInt("NUMERO"); // puede ser NULL
+                    orderNumber = Long.valueOf(numeroDeOrden);
+                    if (res.wasNull()) {
+                        orderNumber = lastOrderNumber(user);
+                    }
+                    if (orderNumber > 0) {
+                        user.setOrderNumber(orderNumber);
                         users.add(user);
                         System.out.println(user.getUserName() + " ok");
-                    } catch (SQLException e) {
+                    } else {
                         System.out.println(user.getUserName() + " error");
-                        //throw new RuntimeException("Error con los datos del Server");
-                        Log.e("API_IMPL", e.getMessage());
                     }
                 }
                 con.close();
@@ -274,6 +277,7 @@ public class APIServiceImpl implements APIService {
 
     @Override
     public Long lastOrderNumber(User user) throws SQLException {
+        Log.d(APIServiceImpl.class.toString(), "lastOrderNumber user: " + user.getUserName());
         try {
             Class.forName(driver).newInstance();
             con = DriverManager.getConnection(url + db, userDB, passDB);
@@ -480,6 +484,7 @@ public class APIServiceImpl implements APIService {
      * @return
      * @throws SQLException
      */
+    @DebugLog
     private Long lastOrderNumberByUser(User user2, Connection con)
             throws SQLException {
         int result = 0;
@@ -571,6 +576,7 @@ public class APIServiceImpl implements APIService {
 
                 result = ps.executeUpdate();
 
+                //TODO deberia actualizar eso ?
                 // Obtengo el ultimo numero de orden
                 // User user2 =
                 // Application.APPLICATION_PROVIDER.get().getUser();

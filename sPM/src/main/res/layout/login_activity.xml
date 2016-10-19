@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="v2.91"
+            android:text="v2.94"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/holo_blue_light" />
     </RelativeLayout>

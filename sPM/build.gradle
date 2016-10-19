@@ -62,7 +62,6 @@ dependencies {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
     compile 'com.android.support:support-v4:24.2.1'
-    compile 'org.apache.httpcomponents:httpclient:4.5'
     compile 'com.google.android.gms:play-services-maps:9.6.1'
     compile 'org.apache.httpcomponents:httpcore:4.4'
 

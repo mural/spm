@@ -296,12 +296,11 @@ public class DashBoardActivity extends AbstractActivity {
         if (user == null) {
             ActivityLauncher.launchActivity(LoginActivity.class);
             finish();
-
         } else if (!Application.APPLICATION_PROVIDER.get().getUser()
                 .checkValidDate()) {
-            user.setUpdateDate(new Date());
-            Application.APPLICATION_PROVIDER.get().attach(user);
-            // AndroidApplication.get().logout(); //TODO waht ? ?¡
+            //user.setUpdateDate(new Date());
+            //Application.APPLICATION_PROVIDER.get().attach(user);
+            AndroidApplication.get().logout();
         } else {
             userName.setText("Bienvenido/a: " + user.getFirstName());
         }
