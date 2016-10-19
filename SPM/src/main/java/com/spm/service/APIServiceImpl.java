@@ -232,15 +232,13 @@ public class APIServiceImpl implements APIService {
     @DebugLog
     @Override
     public Date getPriceListDate() {
-//		// WebService webservice = newGetService("clients", "data");
-//		WebService webservice = newGetService("contacts", "lastUpdate", false);
-//		return webservice.execute(new PriceListDateParser());
         try {
             Class.forName(driver).newInstance();
             con = DriverManager.getConnection(url + db, userDB, passDB);
             try {
                 Statement st = con.createStatement();
-                StringBuffer query = new StringBuffer("SELECT TOP 1 [ID] ,[FK_ERP_ARTICULOS] ,[FK_ERP_LIS_PRECIO] ,[FK_ERP_MONEDAS] ,[PRECIO] ,[FEC_ULT_ACT] FROM [Planeta2].[dbo].[_INT_INF_PRE_VEN] ORDER BY [FEC_ULT_ACT] DESC");
+                StringBuffer query = new StringBuffer("SELECT TOP 1 [ID] ,[FK_ERP_ARTICULOS] ,[FK_ERP_LIS_PRECIO] ,[FK_ERP_MONEDAS] ,[PRECIO] ,[FEC_ULT_ACT] " +
+                        "FROM [Planeta2].[dbo].[_INT_INF_PRE_VEN] ORDER BY [FEC_ULT_ACT] DESC");
                 ResultSet res = st.executeQuery(query.toString());
 
                 System.out.println("Fecha: ");

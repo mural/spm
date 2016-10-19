@@ -118,7 +118,21 @@ public class DashBoardActivity extends AbstractActivity {
 
             @Override
             public void onAsyncRun(View view) {
-                updateDataUseCase();
+                //updateDataUseCase();
+                final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateDataUseCase();
+                    }
+                };
+                executeOnUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlertDialogUtils.showOkCancelDialog(dialogClickListener,
+                                R.string.confirmUpdateTitle, R.string.confirmUpdateMsg,
+                                R.string.update, R.string.notUpdate);
+                    }
+                });
             }
         });
 
@@ -277,14 +291,6 @@ public class DashBoardActivity extends AbstractActivity {
         }
     }
 
-//    /**
-//     * @see android.app.Activity#onBackPressed()
-//     */
-//    @Override
-//    public void onBackPressed() {
-//        AlertDialogUtils.showExitOkCancelDialog();
-//    }
-
     /**
      * @see com.spm.android.common.activity.AbstractActivity#onResume()
      */
@@ -406,26 +412,6 @@ public class DashBoardActivity extends AbstractActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void update() {
-        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                executeUseCase(updateDataUseCase);
-            }
-        };
-
-        executeOnUIThread(new Runnable() {
-
-            @Override
-            public void run() {
-                AlertDialogUtils.showOkCancelDialog(dialogClickListener,
-                        R.string.confirmUpdateTitle, R.string.confirmUpdateMsg,
-                        R.string.update, R.string.notUpdate);
-            }
-        });
     }
 
     @Override
