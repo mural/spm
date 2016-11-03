@@ -38,6 +38,8 @@ public class APIServiceImpl implements APIService {
     // Common parameters
     private static final String USER_ID = "userID";
 
+    private static final String BBDD = "a";
+
     /**
      * @see com.spm.service.APIService#getContacts()
      */
@@ -238,7 +240,7 @@ public class APIServiceImpl implements APIService {
             try {
                 Statement st = con.createStatement();
                 StringBuffer query = new StringBuffer("SELECT TOP 1 [ID] ,[FK_ERP_ARTICULOS] ,[FK_ERP_LIS_PRECIO] ,[FK_ERP_MONEDAS] ,[PRECIO] ,[FEC_ULT_ACT] " +
-                        "FROM [Planeta2].[dbo].[_INT_INF_PRE_VEN] ORDER BY [FEC_ULT_ACT] DESC");
+                        "FROM [_INT_INF_PRE_VEN] ORDER BY [FEC_ULT_ACT] DESC");
                 ResultSet res = st.executeQuery(query.toString());
 
                 System.out.println("Fecha: ");
@@ -329,7 +331,7 @@ public class APIServiceImpl implements APIService {
 
     Connection con = null;
     String url = "jdbc:jtds:sqlserver://planetadulce.dyndns.org/";
-    String db = "Planeta2";
+    String db = BBDD;
     // String db = "Prueba"; // test table
     String driver = "net.sourceforge.jtds.jdbc.Driver";
     String userDB = "celulares";

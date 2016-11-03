@@ -1,85 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.spm"
-    android:versionCode="2000206"
-    android:versionName="2.6">
+    android:versionCode="2000209"
+    android:versionName="2.95">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true" />
-
-    <compatible-screens>
-
-        <!-- small size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="small" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="small" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="small" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="small" />
-
-        <!-- Only hdpi and xhdpi for normal size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="normal" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="normal" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="normal" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="normal" />
-
-        <!-- all large size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="large" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="large" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="large" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="large" />
-
-        <!-- all xlarge size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="xlarge" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="xlarge" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="xlarge" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="xlarge" />
-
-        <!-- Special case for Nexus 7 -->
-        <screen
-            android:screenDensity="213"
-            android:screenSize="large" />
-    </compatible-screens>
 
     <application
         android:name=".android.SPMApplication"

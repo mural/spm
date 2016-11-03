@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res/com.spm"
-	android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
-	android:background="@color/lightWhite">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightWhite"
+    android:orientation="vertical">
 
-	<com.spm.android.common.view.ActionBar android:id="@+id/actionBar"
-		android:layout_width="match_parent" android:layout_height="wrap_content" app:title="Productos" />
+    <com.spm.android.common.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Productos" />
 
-	<TextView android:id="@+id/totales" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Total en $: " android:layout_margin="4dp" />
-	
-	<ListView style="@style/list" android:id="@+id/android:list" android:layout_margin="10dp" />
+    <TextView
+        android:id="@+id/totales"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="Total en $: " />
 
-	<TextView android:id="@id/android:empty" android:text="No hay productos" style="@style/noResultsText" />
+    <ListView
+        android:id="@+id/android:list"
+        style="@style/list"
+        android:layout_margin="10dp" />
+
+    <TextView
+        android:id="@id/android:empty"
+        style="@style/noResultsText"
+        android:text="No hay productos" />
 
 </LinearLayout>

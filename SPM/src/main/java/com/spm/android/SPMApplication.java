@@ -3,6 +3,8 @@ package com.spm.android;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.google.inject.Module;
 import com.spm.android.activity.DashBoardActivity;
@@ -52,6 +54,12 @@ public class SPMApplication extends AndroidApplication {
 				.deleteRealmIfMigrationNeeded()
 				.build();
 		Realm.setDefaultConfiguration(config);
+	}
+
+	@Override
+	protected void attachBaseContext(Context base) {
+		super.attachBaseContext(base);
+		MultiDex.install(this);
 	}
 
 	/**

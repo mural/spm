@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res/com.spm"
-	android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-	<com.spm.android.common.view.ActionBar android:id="@+id/actionBar"
-		android:layout_width="match_parent" android:layout_height="wrap_content" app:title="GPS" />
+    <com.spm.android.common.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="GPS" />
 
-	<TextView android:id="@+id/location" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_below="@+id/actionBar" android:layout_centerHorizontal="true" android:text="XY" android:textSize="22sp"
-		android:layout_margin="15dp" />
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actionBar"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        android:text="XY"
+        android:textSize="22sp" />
 
-	<com.google.android.maps.MapView android:id="@+id/mapView" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:layout_below="@+id/location" android:apiKey="0_ht2_RHNPpC2Q-guAWmVAAO_r03yxfM8h_okng"
-		android:layout_margin="15dp" />
+    <com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/location"
+        android:layout_margin="15dp"
+        android:apiKey="0_ht2_RHNPpC2Q-guAWmVAAO_r03yxfM8h_okng" />
 
 
 </RelativeLayout>

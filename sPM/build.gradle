@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         // replace with the current version of the Android plugin
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         // replace with the current version of the android-apt plugin
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
@@ -28,6 +28,7 @@ android {
         applicationId "com.spm"
         minSdkVersion 14
         targetSdkVersion 21
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -63,6 +64,7 @@ dependencies {
     targetCompatibility = 1.7
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.google.android.gms:play-services-maps:9.6.1'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'org.apache.httpcomponents:httpcore:4.4'
 
     // Android Annotation
